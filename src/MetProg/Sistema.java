@@ -55,7 +55,7 @@ public class Sistema {
             Usuario user = new Operador(nombre, nick, contraseña);
             data.añadirUsuario(user);
         }
-        System.out.println("\n--- Usuario registrado Correctamente ---\n");
+        System.out.println("\n--- Usuario registrado correctamente ---\n");
     }
     
     private String crearNumReg(Database data){
@@ -72,6 +72,21 @@ public class Sistema {
     }
     
     public void darDeBaja(Database data){
+        Scanner input = new Scanner(System.in);
+        String nick;
+        String contraseña;
         
+        System.out.println("Escriba su nick:");
+        nick = input.nextLine();
+        System.out.println("Escriba su contraseña:");
+        contraseña = input.nextLine();
+        if (!data.checkNick(nick)){
+            System.out.println("\n--- No existe ningun usuario con este nick ---\n");
+        } else if (!data.checkNickPass(nick, contraseña)){
+            System.out.println("\n--- Contraseña incorrecta ---\n");
+        } else {
+            data.eliminarUsuario(data.getPosUsuario(nick));
+            System.out.println("\n--- Usuario eliminado correctamente ---\n");
+        }
     }
 }

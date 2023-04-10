@@ -19,11 +19,20 @@ public class Database {
     }
     
     public void eliminarUsuario(int posicion){
-        
+        Usuarios.remove(posicion);
     }
     
     public void añadirUsuario(Usuario usuario){
         Usuarios.add(usuario);
+    }
+    
+    public int getPosUsuario(String nick){
+        for (int i = 0; i < Usuarios.size(); i++){
+            if (nick.equals(Usuarios.get(i).getNick())){
+                return (i);
+            }
+        }
+        return (-1);
     }
     
     //check if nick is in use, return true if it already exists.
