@@ -17,6 +17,9 @@ public class ProgramManager {
             System.out.println("2.- Registrarse");
             System.out.println("3.- Salir del sistema");
             opcion = input.nextInt();
+            if (opcion == 2){
+                System.out.println("holaa");
+            }
         }
     }
 }
