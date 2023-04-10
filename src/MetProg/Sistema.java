@@ -62,10 +62,10 @@ public class Sistema {
         Random r = new Random();
         String numReg;
         do {
-            char a = (char)(r.nextInt(26) + 'a');
+            char a = (char)(r.nextInt(26) + 'A');
             Integer n = r.nextInt(99);
-            char b = (char)(r.nextInt(26) + 'a');
-            char c = (char)(r.nextInt(26) + 'a');
+            char b = (char)(r.nextInt(26) + 'A');
+            char c = (char)(r.nextInt(26) + 'A');
             numReg = (a + n.toString() + b + c);
         } while(data.checkNumReg(numReg));
         return (numReg);
