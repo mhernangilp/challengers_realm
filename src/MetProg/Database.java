@@ -35,6 +35,10 @@ public class Database {
         return (-1);
     }
     
+    public Usuario getUsuarioByPos(int pos){
+        return Usuarios.get(pos);
+    }
+    
     //check if nick is in use, return true if it already exists.
     public boolean checkNick(String nick){
         for (int i = 0; i < Usuarios.size(); i++){

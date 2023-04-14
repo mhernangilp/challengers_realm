@@ -21,7 +21,8 @@ public class ProgramManager {
             System.out.println("4.- Salir del sistema");
             opcion = input.nextInt();
             switch (opcion){
-                case 1: break;
+                case 1: sistema.logIn(data);
+                        break;
                 
                 case 2: sistema.registro(data);
                         break;

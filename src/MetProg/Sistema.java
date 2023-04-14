@@ -7,7 +7,52 @@ import java.util.Scanner;
 
 public class Sistema {
     public void logIn(Database data){
+        Scanner input = new Scanner(System.in);
+        String nick;
+        String contraseña;
+        Integer opcion;
         
+        System.out.println("Escriba su nick:");
+        nick = input.nextLine();
+        System.out.println("Escriba su contraseña:");
+        contraseña = input.nextLine();
+        if (!data.checkNick(nick)){
+            System.out.println("\n--- No existe ningun usuario con este nick ---\n");
+        } else if (!data.checkNickPass(nick, contraseña)){
+            System.out.println("\n--- Contraseña incorrecta ---\n");
+        } else {
+            System.out.println("\n--- Inicio de sesión correcto ---\n");
+            Usuario personaje = data.getUsuarioByPos(data.getPosUsuario(nick));
+            do {
+                if (personaje instanceof Cliente){
+                    if (((Cliente)personaje).getPersonaje() == null){
+                        System.out.println("Elija una opcion:");
+                        System.out.println("1.- Cerrar sesion");
+                        System.out.println("2.- Registrar personaje");
+                        System.out.println("3.- Consultar ranking global");
+                        opcion = input.nextInt();
+                    } else {
+
+                        //checkear si hay algun desafio pendiente
+
+                        System.out.println("Elija una opcion:");
+                        System.out.println("1.- Cerrar sesion");
+                        System.out.println("2.- Elegir arma activa");
+                        System.out.println("3.- Desafiar usuario");
+                        System.out.println("4.- Consultar historial");
+                        System.out.println("5.- Consultar ranking global");
+                        opcion = input.nextInt();
+                    }
+                } else {
+                    System.out.println("Elija una opcion:");
+                        System.out.println("1.- Cerrar sesion");
+                        System.out.println("2.- Editar personaje");
+                        System.out.println("3.- Validar desafios");
+                        System.out.println("4.- Banear usuarios");
+                        opcion = input.nextInt();
+                }
+            } while (opcion != 1);
+        }
     }
     
     private void pantallaDesafio(Database data){
