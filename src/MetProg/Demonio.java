@@ -6,4 +6,12 @@ import java.util.ArrayList;
 public class Demonio extends Esbirro{
     private String pacto;
     private ArrayList<Esbirro> esbirros;
+
+    public Demonio(String pacto, ArrayList<Esbirro> esbirros, String nombre, Integer salud) {
+        super(nombre, salud);
+        this.pacto = pacto;
+        this.esbirros = esbirros;
+    }
+    
+    
 }

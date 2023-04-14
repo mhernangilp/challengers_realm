@@ -10,6 +10,7 @@ public class ProgramManager {
         Integer opcion = 0;
         Scanner input = new Scanner(System.in);
         
+        data.inicializarPersonajes();
         while (opcion != 4){
             System.out.println("-----------------------");
             System.out.println("  .: Bienvenido !! :.");
