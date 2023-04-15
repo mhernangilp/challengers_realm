@@ -31,6 +31,17 @@ public class Sistema {
                         System.out.println("2.- Registrar personaje");
                         System.out.println("3.- Consultar ranking global");
                         opcion = input.nextInt();
+                        switch (opcion){
+                            case 1: break;
+                            
+                            case 2: ((Cliente) personaje).registrarPersonaje();
+                                    break;
+                            
+                            case 3: break;
+                            
+                            default:System.out.println("\n--- Por favor seleccione una opcion correcta ---\n");
+                                    break;
+                        }
                     } else {
 
                         //checkear si hay algun desafio pendiente
@@ -41,7 +52,25 @@ public class Sistema {
                         System.out.println("3.- Desafiar usuario");
                         System.out.println("4.- Consultar historial");
                         System.out.println("5.- Consultar ranking global");
+                        System.out.println("6.- Dar de baja personaje");
                         opcion = input.nextInt();
+                        switch (opcion){
+                            case 1: break;
+                            
+                            case 2: break;
+                            
+                            case 3: break;
+                            
+                            case 4: break;
+                            
+                            case 5: break;
+                            
+                            case 6: ((Cliente) personaje).darBajaPersonaje();
+                                    break;
+                            
+                            default:System.out.println("\n--- Por favor seleccione una opcion correcta ---\n");
+                                    break;
+                        }
                     }
                 } else {
                     System.out.println("Elija una opcion:");
@@ -50,6 +79,18 @@ public class Sistema {
                         System.out.println("3.- Validar desafios");
                         System.out.println("4.- Banear usuarios");
                         opcion = input.nextInt();
+                        switch (opcion){
+                            case 1: break;
+                            
+                            case 2: break;
+                            
+                            case 3: break;
+                            
+                            case 4: break;
+                            
+                            default:System.out.println("\n--- Por favor seleccione una opcion correcta ---\n");
+                                    break;
+                        }
                 }
             } while (opcion != 1);
         }
