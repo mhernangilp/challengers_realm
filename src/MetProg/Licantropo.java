@@ -11,6 +11,10 @@ public class Licantropo extends Personaje{
         super(habilidad, armas, armaduras, esbirros, salud, debilidades, fortalezas);
         this.rabia = rabia;
     }
+
+    public Integer getRabia() {
+        return rabia;
+    }
     
     
 }

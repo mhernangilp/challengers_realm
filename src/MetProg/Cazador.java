@@ -11,6 +11,10 @@ public class Cazador extends Personaje{
         super(habilidad, armas, armaduras, esbirros, salud, debilidades, fortalezas);
         this.voluntad = voluntad;
     }
+
+    public Integer getVoluntad() {
+        return voluntad;
+    }
     
     
 }

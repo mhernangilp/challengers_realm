@@ -8,6 +8,10 @@ public class Humano extends Esbirro{
         super(nombre, salud);
         this.lealtad = lealtad;
     }
+
+    public Integer getLealtad() {
+        return lealtad;
+    }
     
     
 }

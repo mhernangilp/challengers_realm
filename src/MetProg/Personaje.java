@@ -22,6 +22,34 @@ public class Personaje {
         this.debilidades = debilidades;
         this.fortalezas = fortalezas;
     }
+
+    public Habilidad getHabilidad() {
+        return habilidad;
+    }
+
+    public HashMap<String, Arma> getArmas() {
+        return armas;
+    }
+
+    public HashMap<String, Armadura> getArmaduras() {
+        return armaduras;
+    }
+
+    public ArrayList<Esbirro> getEsbirros() {
+        return esbirros;
+    }
+
+    public Integer getSalud() {
+        return salud;
+    }
+
+    public ArrayList<Debilidad> getDebilidades() {
+        return debilidades;
+    }
+
+    public ArrayList<Fortaleza> getFortalezas() {
+        return fortalezas;
+    }
     
     
 }

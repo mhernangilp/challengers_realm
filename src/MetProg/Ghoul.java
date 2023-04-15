@@ -8,6 +8,10 @@ public class Ghoul extends Esbirro{
         super(nombre, salud);
         this.dependencia = dependencia;
     }
+
+    public Integer getDependencia() {
+        return dependencia;
+    }
     
     
 }

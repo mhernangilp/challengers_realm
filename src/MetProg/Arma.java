@@ -13,6 +13,22 @@ public class Arma {
         this.modifDefensa = modifDefensa;
         this.peso = peso;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Integer getModifAtaque() {
+        return modifAtaque;
+    }
+
+    public Integer getModifDefensa() {
+        return modifDefensa;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
     
     
 }

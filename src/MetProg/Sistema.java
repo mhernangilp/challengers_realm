@@ -22,10 +22,14 @@ public class Sistema {
             System.out.println("\n--- Contraseña incorrecta ---\n");
         } else {
             System.out.println("\n--- Inicio de sesión correcto ---\n");
-            Usuario personaje = data.getUsuarioByPos(data.getPosUsuario(nick));
+            Usuario usuario = data.getUsuarioByPos(data.getPosUsuario(nick));
             do {
-                if (personaje instanceof Cliente){
-                    if (((Cliente)personaje).getPersonaje() == null){
+                if (usuario instanceof Cliente){
+                    if (((Cliente) usuario).isBaneado()){
+                        System.out.println("\n--- Usuario baneado ---\n");
+                        return ;
+                    }
+                    if (((Cliente)usuario).getPersonaje() == null){
                         System.out.println("Elija una opcion:");
                         System.out.println("1.- Cerrar sesion");
                         System.out.println("2.- Registrar personaje");
@@ -34,10 +38,11 @@ public class Sistema {
                         switch (opcion){
                             case 1: break;
                             
-                            case 2: ((Cliente) personaje).registrarPersonaje();
+                            case 2: ((Cliente) usuario).registrarPersonaje();
                                     break;
                             
-                            case 3: break;
+                            case 3: // ranking global
+                                    break;
                             
                             default:System.out.println("\n--- Por favor seleccione una opcion correcta ---\n");
                                     break;
@@ -48,7 +53,7 @@ public class Sistema {
 
                         System.out.println("Elija una opcion:");
                         System.out.println("1.- Cerrar sesion");
-                        System.out.println("2.- Elegir arma activa");
+                        System.out.println("2.- Elegir equipo activo");
                         System.out.println("3.- Desafiar usuario");
                         System.out.println("4.- Consultar historial");
                         System.out.println("5.- Consultar ranking global");
@@ -57,15 +62,19 @@ public class Sistema {
                         switch (opcion){
                             case 1: break;
                             
-                            case 2: break;
+                            case 2: ((Cliente) usuario).elegirEquipo(data, ((Cliente) usuario).getPersonaje().getTipo(), usuario);
+                                    break;
                             
-                            case 3: break;
+                            case 3: // desafiar Usuario
+                                    break;
                             
-                            case 4: break;
+                            case 4: // consultar historial
+                                    break;
                             
-                            case 5: break;
+                            case 5: // ranking global
+                                    break;
                             
-                            case 6: ((Cliente) personaje).darBajaPersonaje();
+                            case 6: ((Cliente) usuario).darBajaPersonaje();
                                     break;
                             
                             default:System.out.println("\n--- Por favor seleccione una opcion correcta ---\n");

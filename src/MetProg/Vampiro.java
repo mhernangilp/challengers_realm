@@ -13,6 +13,14 @@ public class Vampiro extends Personaje{
         this.edad = edad;
         this.puntosSangre = puntosSangre;
     }
+
+    public Integer getEdad() {
+        return edad;
+    }
+
+    public Integer getPuntosSangre() {
+        return puntosSangre;
+    }
     
     
 }

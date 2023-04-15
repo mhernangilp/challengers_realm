@@ -9,6 +9,14 @@ public class Esbirro {
         this.nombre = nombre;
         this.salud = salud;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Integer getSalud() {
+        return salud;
+    }
     
     
 }

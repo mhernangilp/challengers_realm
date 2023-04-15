@@ -11,6 +11,10 @@ public class Database {
     public ArrayList<Usuario> getUsuarios() {
         return Usuarios;
     }
+
+    public Personaje getPersonaje(int pos) {
+        return personajes[pos];
+    }
     
     public void loadData(){
         
@@ -26,10 +30,10 @@ public class Database {
             Habilidad habilidad1 = new Disciplina(2, "Disciplina", 2, 1);
             HashMap<String,Arma> armas1 = new HashMap<String,Arma>();
             Arma arma11 = new Arma("Martillo de telefonica", 3, 2, 1);
-            Arma arma12 = new Arma("Puño de rompe ralf", 2, 1, 0.5);
+            Arma arma12 = new Arma("Puno de rompe ralf", 2, 1, 0.5);
             Arma arma13 = new Arma("Espada de en bucle", 2, 0, 0.5);
             armas1.put("Martillo de telefonica", arma11);
-            armas1.put("Puño de rompe ralf", arma12);
+            armas1.put("Puno de rompe ralf", arma12);
             armas1.put("Espada de en bucle", arma13);
             HashMap<String,Armadura> armaduras1 = new HashMap<String,Armadura>();
             Armadura armadura11 = new Armadura("Pechera de diamante", 1, 3);
@@ -99,9 +103,9 @@ public class Database {
             Arma arma31 = new Arma("La temida BK", 3, 3, 1);
             Arma arma32 = new Arma("Hacha naranja", 3, 1, 0.5);
             Arma arma33 = new Arma("Espada que cae de canto", 2, 0, 0.5);
-            armas2.put("La temida BK", arma31);
-            armas2.put("Hacha naranja", arma32);
-            armas2.put("Espada que cae de canto", arma33);
+            armas3.put("La temida BK", arma31);
+            armas3.put("Hacha naranja", arma32);
+            armas3.put("Espada que cae de canto", arma33);
             HashMap<String,Armadura> armaduras3 = new HashMap<String,Armadura>();
             Armadura armadura31 = new Armadura("Brazaletes de Zeus", 0, 1);
             Armadura armadura32 = new Armadura("Camiseta del lol", 2, 3);

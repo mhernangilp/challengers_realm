@@ -12,6 +12,14 @@ public class Demonio extends Esbirro{
         this.pacto = pacto;
         this.esbirros = esbirros;
     }
+
+    public String getPacto() {
+        return pacto;
+    }
+
+    public ArrayList<Esbirro> getEsbirros() {
+        return esbirros;
+    }
     
     
 }

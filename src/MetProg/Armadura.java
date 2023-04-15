@@ -11,6 +11,14 @@ public class Armadura {
         this.modifAtaque = modifAtaque;
         this.modifDefensa = modifDefensa;
     }
+
+    public Integer getModifAtaque() {
+        return modifAtaque;
+    }
+
+    public Integer getModifDefensa() {
+        return modifDefensa;
+    }
     
     
 }
