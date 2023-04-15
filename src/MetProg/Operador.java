@@ -57,7 +57,8 @@ public class Operador extends Usuario{
                 case 1: personaje.modificarArmas();
                         break;
                 
-                case 2: break;
+                case 2: personaje.modificarArmadura();
+                        break;
                 
                 case 3: break;
                 

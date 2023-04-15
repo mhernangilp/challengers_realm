@@ -185,4 +185,104 @@ public class Personaje {
             }
         } while (opcion != 4);
     }
+    public void modificarArmadura(){
+           
+        Scanner input = new Scanner(System.in);
+        Integer opcion, modifAtaque, modifDefensa;
+        String nombre;
+        Armadura armadura;
+        
+        do {
+            System.out.println("Elija una opcion:");
+            System.out.println("1.- Añadir armadura");
+            System.out.println("2.- Eliminar armadura");
+            System.out.println("3.- Modificar armadura");
+            System.out.println("4.- Volver");
+            opcion = input.nextInt();
+            input.nextLine();
+            switch (opcion){
+                case 1: System.out.println("Nombre de la nueva armadura: ");
+                        nombre = input.nextLine();
+                        System.out.println("Modificador de ataque: (rango 1-3)");
+                        modifAtaque = input.nextInt();
+                        if (modifAtaque < 1 || modifAtaque > 3){
+                            System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                            break;
+                        }
+                        System.out.println("Modificador de defensa: (rango 1-3)");
+                        modifDefensa = input.nextInt();
+                        if (modifDefensa < 1 || modifDefensa > 3){
+                            System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                            break;
+                        }
+                        armadura = new Armadura(nombre, modifAtaque, modifDefensa);
+                        armaduras.put(nombre,armadura);
+                        System.out.println("\n--- Armadura añadida correctamente ---\n");
+                        break;
+
+                case 2: System.out.println("Escriba la armadura que quiere eliminar:");
+                        for (Map.Entry<String, Armadura> entry : armaduras.entrySet()){
+                            System.out.println("-- '" + entry.getKey() + "':");
+                            System.out.println("    Modificacion de ataque: " + entry.getValue().getModifAtaque());
+                            System.out.println("    Modificacion de defesa: " + entry.getValue().getModifDefensa());
+                            
+                        }
+                        nombre = input.nextLine();
+                        if (armaduras.containsKey(nombre)){
+                            armaduras.remove(nombre);
+                            System.out.println("\n--- Armadura eliminada correctamente ---\n");
+                        } else {
+                            System.out.println("Por favor escriba un nombre de armadura correcto\n");
+                        }
+                        break;
+
+                case 3: System.out.println("Escriba la armadura que quiere modificar:");
+                        for (Map.Entry<String, Armadura> entry : armaduras.entrySet()){
+                            System.out.println("-- '" + entry.getKey() + "':");
+                            System.out.println("    Modificacion de ataque: " + entry.getValue().getModifAtaque());
+                            System.out.println("    Modificacion de defesa: " + entry.getValue().getModifDefensa());
+                        }
+                        nombre = input.nextLine();
+                        if (armaduras.containsKey(nombre)){
+                            String nuevoNombre;
+                            
+                            System.out.println("Escriba el nuevo nombre para esta armadura: ('N' para no modificar este valor)");
+                            nuevoNombre = input.nextLine();
+                            if (nuevoNombre.equals("N") || nuevoNombre.equals("n")){
+                                nuevoNombre = nombre;
+                            }
+                            System.out.println("Escriba el nuevo valor del modificador de ataque: (rango 1-3,0 para no modificar este valor)");
+                            modifAtaque = input.nextInt();
+                            if (modifAtaque < 0 || modifAtaque > 3){
+                                System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                                break;
+                            }
+                            if (modifAtaque == 0){
+                                modifAtaque = armaduras.get(nombre).getModifAtaque();
+                            }
+                            System.out.println("Escriba el nuevo valor del modificador de defensa: (rango 1-3,0 para no modificar este valor)");
+                            modifDefensa = input.nextInt();
+                            if (modifDefensa < 0 || modifDefensa > 3){
+                                System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                                break;
+                            }
+                            if (modifDefensa == 0){
+                                modifDefensa = armaduras.get(nombre).getModifDefensa();
+                            }
+                            armadura = new Armadura(nuevoNombre, modifAtaque, modifDefensa);
+                           
+                            armaduras.remove(nombre);
+                            armaduras.put(nuevoNombre, armadura);
+                           
+                            System.out.println("\n--- Armadura modificada correctamente ---\n");
+                        } else {
+                            System.out.println("Por favor escriba un nombre de armadura correcto\n");
+                        }
+                        break;
+
+                default: break;
+            }
+        } while (opcion != 4);
+    }
+    
 }
