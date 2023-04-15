@@ -8,6 +8,10 @@ public class Disciplina extends Habilidad{
         super(nombre, ataque, defensa);
         this.costeSangre = costeSangre;
     }
+
+    public Integer getCosteSangre() {
+        return costeSangre;
+    }
     
     
 }

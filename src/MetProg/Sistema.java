@@ -94,7 +94,8 @@ public class Sistema {
                             case 2: ((Operador) usuario).editarPersonaje(data);
                                     break;
                             
-                            case 3: break;
+                            case 3: ((Operador) usuario).validarDesafios(data);
+                                    break;
                             
                             case 4: break;
                             

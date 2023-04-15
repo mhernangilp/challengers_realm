@@ -1,12 +1,22 @@
 
 package MetProg;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Operador extends Usuario{
     
     public Operador(String nombre, String nick, String contraseña) {
         super(nombre, nick, contraseña);
+    }
+    
+    public void validarDesafios(Database data){
+        ArrayList<Desafio> desafios = data.getDesafios();
+        for (int i = 0; i < desafios.size(); i++){
+            System.out.println("\n" + i + ":");
+            System.out.println("    Desafiante: " + desafios.get(i).getDebDesafiante());
+            System.out.println("    Desafiado: " + desafios.get(i).getDebDesafiado());
+        }
     }
     
     public void editarPersonaje(Database data){

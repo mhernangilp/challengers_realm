@@ -23,4 +23,38 @@ public class Desafio {
         this.oroApostado = oroApostado;
         this.validado = false;
     }
+
+    public boolean isValidado() {
+        return validado;
+    }
+
+    public String getDesafiante() {
+        return desafiante;
+    }
+
+    public ArrayList<Debilidad> getDebDesafiante() {
+        return debDesafiante;
+    }
+
+    public ArrayList<Fortaleza> getFortDesafiante() {
+        return fortDesafiante;
+    }
+
+    public String getDesafiado() {
+        return desafiado;
+    }
+
+    public ArrayList<Debilidad> getDebDesafiado() {
+        return debDesafiado;
+    }
+
+    public ArrayList<Fortaleza> getFortDesafiado() {
+        return fortDesafiado;
+    }
+
+    public long getOroApostado() {
+        return oroApostado;
+    }
+    
+    
 }

@@ -11,6 +11,18 @@ public class Habilidad {
         this.ataque = ataque;
         this.defensa = defensa;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Integer getAtaque() {
+        return ataque;
+    }
+
+    public Integer getDefensa() {
+        return defensa;
+    }
     
     
 }

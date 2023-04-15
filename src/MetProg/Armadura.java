@@ -19,6 +19,10 @@ public class Armadura {
     public Integer getModifDefensa() {
         return modifDefensa;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
     
     
 }

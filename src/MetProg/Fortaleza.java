@@ -9,6 +9,14 @@ public class Fortaleza {
         this.nombre = nombre;
         this.valor = valor;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Integer getValor() {
+        return valor;
+    }
     
     
 }
