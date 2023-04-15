@@ -17,6 +17,7 @@ public class PersonajeUsuario {
         this.armaActiva = new String[2];
         this.oro = 0;
         this.historial = new ArrayList<Historial>();
+        this.oro = 1000;
     }
 
     public String getTipo() {

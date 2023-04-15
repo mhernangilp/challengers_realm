@@ -149,6 +149,56 @@ public class Cliente extends Usuario{
         }
     }
     
+    public void desafiarUsuario(Database data){
+        Scanner input = new Scanner(System.in);
+        String nick;
+        Integer tipoDesafiante, tipoDesafiado;
+        Desafio desafio;
+        long oroApostado;
+        
+        System.out.println("Escriba el nick al usuario al que desea desafiar:");
+        nick = input.nextLine();
+        if (!data.checkNick(nick)){
+            System.out.println("\n--- No existe ningun usuario con ese nick ---\n");
+            return ;
+        }
+        System.out.println("Cuanto oro desea apostar:");
+        oroApostado = input.nextLong();
+        if (oroApostado < 0 || oroApostado > personaje.getOro()){
+            System.out.println("\n--- Cantidad de oro no valida ---\n");
+            return ;
+        }
+        switch (this.getPersonaje().getTipo()){
+            case "Vampiro": tipoDesafiante = 0;
+                            break;
+        
+            case "Licantropo": tipoDesafiante = 1;
+                               break;
+        
+            case "Cazador": tipoDesafiante = 2;
+                            break;
+            default: tipoDesafiante = null;
+                     break;
+        }
+        switch (((Cliente) data.getUsuarios().get(data.getPosUsuario(nick))).getPersonaje().getTipo()){
+            case "Vampiro": tipoDesafiado = 0;
+                            break;
+        
+            case "Licantropo": tipoDesafiado = 1;
+                               break;
+        
+            case "Cazador": tipoDesafiado = 2;
+                            break;
+            default: tipoDesafiado = null;
+                     break;
+        }
+        if (tipoDesafiante == null || tipoDesafiado == null){
+            return ;
+        }
+        desafio = new Desafio(this.getNombre(), data.getPersonaje(tipoDesafiante).getDebilidades(), data.getPersonaje(tipoDesafiante).getFortalezas(), nick, data.getPersonaje(tipoDesafiado).getDebilidades(), data.getPersonaje(tipoDesafiante).getFortalezas(), oroApostado);
+        data.getDesafios().add(desafio);
+    }
+    
     public void darBajaPersonaje(){
         Scanner input = new Scanner(System.in);
         Integer opcion;

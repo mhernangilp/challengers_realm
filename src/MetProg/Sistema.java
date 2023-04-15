@@ -65,7 +65,7 @@ public class Sistema {
                             case 2: ((Cliente) usuario).elegirEquipo(data, ((Cliente) usuario).getPersonaje().getTipo(), usuario);
                                     break;
                             
-                            case 3: // desafiar Usuario
+                            case 3: ((Cliente) usuario).desafiarUsuario(data);
                                     break;
                             
                             case 4: // consultar historial

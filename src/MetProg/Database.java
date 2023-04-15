@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 public class Database {
     private ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
+    private ArrayList<Desafio> desafios = new ArrayList<Desafio>();
     private Personaje[] personajes;
 
     public ArrayList<Usuario> getUsuarios() {
@@ -14,6 +15,10 @@ public class Database {
 
     public Personaje getPersonaje(int pos) {
         return personajes[pos];
+    }
+
+    public ArrayList<Desafio> getDesafios() {
+        return desafios;
     }
     
     public void loadData(){
