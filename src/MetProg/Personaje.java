@@ -3,6 +3,8 @@ package MetProg;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Personaje {
     private Habilidad habilidad;
@@ -51,5 +53,136 @@ public class Personaje {
         return fortalezas;
     }
     
-    
+    public void modificarArmas(){
+        Scanner input = new Scanner(System.in);
+        Integer opcion, modifAtaque, modifDefensa, manos;
+        String nombre;
+        Arma arma;
+        
+        do {
+            System.out.println("Elija una opcion:");
+            System.out.println("1.- Añadir arma");
+            System.out.println("2.- Eliminar arma");
+            System.out.println("3.- Modificar arma");
+            System.out.println("4.- Volver");
+            opcion = input.nextInt();
+            input.nextLine();
+            switch (opcion){
+                case 1: System.out.println("Nombre del nuevo arma: ");
+                        nombre = input.nextLine();
+                        System.out.println("Modificador de ataque: (rango 1-3)");
+                        modifAtaque = input.nextInt();
+                        if (modifAtaque < 1 || modifAtaque > 3){
+                            System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                            break;
+                        }
+                        System.out.println("Modificador de defensa: (rango 1-3)");
+                        modifDefensa = input.nextInt();
+                        if (modifDefensa < 1 || modifDefensa > 3){
+                            System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                            break;
+                        }
+                        System.out.println("Manos de el arma: (1 o 2)");
+                        manos = input.nextInt();
+                        if (manos < 1 || manos > 2){
+                            System.out.println("\n--- Valor invalido, rango 1-2 ---\n");
+                            break;
+                        }
+                        if (manos == 1){
+                            arma = new Arma(nombre, modifAtaque, modifDefensa, 0.5);
+                        } else {
+                            arma = new Arma(nombre, modifAtaque, modifDefensa, 1);
+                        }
+                        armas.put(nombre, arma);
+                        System.out.println("\n--- Arma añadida correctamente ---\n");
+                        break;
+
+                case 2: System.out.println("Escriba el arma que quiere eliminar:");
+                        for (Map.Entry<String, Arma> entry : armas.entrySet()){
+                            System.out.println("-- '" + entry.getKey() + "':");
+                            System.out.println("    Modificacion de ataque: " + entry.getValue().getModifAtaque());
+                            System.out.println("    Modificacion de defesa: " + entry.getValue().getModifDefensa());
+                            if (entry.getValue().getPeso() == 0.5){
+                                System.out.println("    Manos: 1\n");
+                            } else {
+                                System.out.println("    Manos: 2\n");
+                            }
+                        }
+                        nombre = input.nextLine();
+                        if (armas.containsKey(nombre)){
+                            armas.remove(nombre);
+                            System.out.println("\n--- Arma eliminada correctamente ---\n");
+                        } else {
+                            System.out.println("Por favor escriba un nombre de arma correcto\n");
+                        }
+                        break;
+
+                case 3: System.out.println("Escriba el arma que quiere modificar:");
+                        for (Map.Entry<String, Arma> entry : armas.entrySet()){
+                            System.out.println("-- '" + entry.getKey() + "':");
+                            System.out.println("    Modificacion de ataque: " + entry.getValue().getModifAtaque());
+                            System.out.println("    Modificacion de defesa: " + entry.getValue().getModifDefensa());
+                            if (entry.getValue().getPeso() == 0.5){
+                                System.out.println("    Manos: 1\n");
+                            } else {
+                                System.out.println("    Manos: 2\n");
+                            }
+                        }
+                        nombre = input.nextLine();
+                        if (armas.containsKey(nombre)){
+                            String nuevoNombre;
+                            
+                            System.out.println("Escriba el nuevo nombre para este arma: ('N' para no modificar este valor)");
+                            nuevoNombre = input.nextLine();
+                            if (nuevoNombre.equals("N") || nuevoNombre.equals("n")){
+                                nuevoNombre = nombre;
+                            }
+                            System.out.println("Escriba el nuevo valor del modificador de ataque: (rango 1-3,0 para no modificar este valor)");
+                            modifAtaque = input.nextInt();
+                            if (modifAtaque < 0 || modifAtaque > 3){
+                                System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                                break;
+                            }
+                            if (modifAtaque == 0){
+                                modifAtaque = armas.get(nombre).getModifAtaque();
+                            }
+                            System.out.println("Escriba el nuevo valor del modificador de defensa: (rango 1-3,0 para no modificar este valor)");
+                            modifDefensa = input.nextInt();
+                            if (modifDefensa < 0 || modifDefensa > 3){
+                                System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                                break;
+                            }
+                            if (modifDefensa == 0){
+                                modifDefensa = armas.get(nombre).getModifDefensa();
+                            }
+                            System.out.println("Escriba cuantas manos ocupa el nuevo arma: (rango 1-2,0 para no modificar este valor)");
+                            manos = input.nextInt();
+                            if (manos < 0 || manos > 2){
+                                System.out.println("\n--- Valor invalido, rango 1-2 ---\n");
+                                break;
+                            }
+                            if (manos == 0){
+                                if (armas.get(nombre).getPeso() == 0.5){
+                                    manos = 1;
+                                } else {
+                                    manos = 2;
+                                }
+                            }
+                            if (manos == 1){
+                                arma = new Arma(nuevoNombre, modifAtaque, modifDefensa, 0.5);
+                            } else {
+                                arma = new Arma(nuevoNombre, modifAtaque, modifDefensa, 1);
+                            }
+                            armas.remove(nombre);
+                            armas.put(nuevoNombre, arma);
+                            System.out.println("\n--- Arma modificada correctamente ---\n");
+                        } else {
+                            System.out.println("Por favor escriba un nombre de arma correcto\n");
+                        }
+                        break;
+
+                default: break;
+            }
+        } while (opcion != 4);
+    }
 }

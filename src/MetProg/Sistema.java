@@ -91,7 +91,8 @@ public class Sistema {
                         switch (opcion){
                             case 1: break;
                             
-                            case 2: break;
+                            case 2: ((Operador) usuario).editarPersonaje(data);
+                                    break;
                             
                             case 3: break;
                             
