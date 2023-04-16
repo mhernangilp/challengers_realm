@@ -193,7 +193,7 @@ public class Operador extends Usuario{
                 
                 case 3: break;
                 
-                case 4: break;
+                case 4: personaje.modificarEsbirros();
                 
                 case 5: break;
                 
