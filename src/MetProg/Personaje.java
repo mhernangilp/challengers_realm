@@ -284,7 +284,10 @@ public class Personaje {
             }
         } while (opcion != 4);
     }
-    public void modificarHabilidades(){}
+    public void modificarHabilidades(){
+    
+    
+    }
     
     
     
@@ -336,7 +339,7 @@ public class Personaje {
                                 humano = new Humano(lealtad, nombre, salud);
                                 esbirros.add(humano); 
                                 System.out.println("Humano añadidio correctamente");
-                                System.out.println(esbirros);
+                          ;
                                 break;
                         
                             case 2: 
@@ -349,7 +352,7 @@ public class Personaje {
                                  ghoul = new Ghoul(dependencia, nombre, salud);
                                  esbirros.add(ghoul);
                                  System.out.println("Ghoul añadido correctamente");
-                                 System.out.println(esbirros);
+                             
                                  break;
                             case 3: 
                                 System.out.println("Pacto entre demonio y amo");
@@ -357,7 +360,7 @@ public class Personaje {
                                 input.nextLine();
                                 
                               
-                        }do{
+                        do{
                                  System.out.println("Desea añadir esbirros al demonio(1 para añadir esbirros, 0 para no añadir)");
                                  confirmacion = input.nextInt();
                                  if (confirmacion==1){
@@ -409,16 +412,41 @@ public class Personaje {
                         }      
                         }else {
                                 System.out.println("Por favor escriba un valor entre 0 y 1");
+                                break;
+                               
                                          }  
                                  
                              }while (confirmacion != 0);
-                                      
+                        }    break;       
               
-            }       
+                case 2:
+                        System.out.println("Escriba el esbirro que quiera eliminar");
+                           for (int i= 0; i< esbirros.size(); i++){}
+                           break;
+                
+                case 3: System.out.println("Escriba el esbirro que qiuera modificar");
+                break;
+                        }       
         }while (opcion !=4);
             
         
         }
+    public Integer modificarSalud(Personaje personaje){
+        Scanner input = new Scanner(System.in);
+        Integer  nuevaSalud;
+        System.out.println("La salud del personaje es:" +personaje.getSalud());
+
+            System.out.println("Escriba la nueva salud de su personaje");
+            nuevaSalud = input.nextInt();
+            personaje.salud = nuevaSalud;
+            System.out.println("La nueva salud de su personaje es:"+ personaje.getSalud());
+            return nuevaSalud;
+      
+    
+    
+    
+    
+    }
 }
    
 

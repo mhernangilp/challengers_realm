@@ -195,7 +195,12 @@ public class Operador extends Usuario{
                 
                 case 4: personaje.modificarEsbirros();
                 
-                case 5: break;
+                case 5:
+                
+               personaje.modificarSalud(personaje);
+               
+                
+                    break;
                 
                 case 6: break;
                 
