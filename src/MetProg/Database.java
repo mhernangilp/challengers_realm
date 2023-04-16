@@ -145,6 +145,15 @@ public class Database {
         Usuarios.add(usuario);
     }
     
+    public int getPosDesafio(String nick){
+        for (int i = 0; i < desafios.size(); i++){
+            if (nick.equals(desafios.get(i).getDesafiado())){
+                return (i);
+            }
+        }
+        return (-1);
+    }
+    
     public int getPosUsuario(String nick){
         for (int i = 0; i < Usuarios.size(); i++){
             if (nick.equals(Usuarios.get(i).getNick())){

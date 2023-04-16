@@ -162,6 +162,10 @@ public class Cliente extends Usuario{
             System.out.println("\n--- No existe ningun usuario con ese nick ---\n");
             return ;
         }
+        if (data.getUsuarioByPos(data.getPosUsuario(nick)) instanceof Operador){
+            System.out.println("\n--- Este usuario es un operador, no se le puede desafiar ---\n");
+            return ;
+        }
         System.out.println("Cuanto oro desea apostar:");
         oroApostado = input.nextLong();
         if (oroApostado < 0 || oroApostado > personaje.getOro()){
@@ -197,6 +201,7 @@ public class Cliente extends Usuario{
         }
         desafio = new Desafio(this.getNombre(), data.getPersonaje(tipoDesafiante).getDebilidades(), data.getPersonaje(tipoDesafiante).getFortalezas(), nick, data.getPersonaje(tipoDesafiado).getDebilidades(), data.getPersonaje(tipoDesafiante).getFortalezas(), oroApostado);
         data.getDesafios().add(desafio);
+        System.out.println("\n--- Desafio añadido correctamente ---\n");
     }
     
     public void darBajaPersonaje(){

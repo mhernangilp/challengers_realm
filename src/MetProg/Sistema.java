@@ -48,9 +48,28 @@ public class Sistema {
                                     break;
                         }
                     } else {
-
-                        //checkear si hay algun desafio pendiente
-
+                        if (data.getPosDesafio(usuario.getNick()) != -1 && data.getDesafios().get(data.getPosDesafio(usuario.getNick())).isValidado()){
+                            Combate combate = new Combate();
+                            Desafio desafio = data.getDesafios().get(data.getPosDesafio(usuario.getNick()));
+                            do {
+                            System.out.println("¡¡ Tienes un desafio nuevo!!");
+                            System.out.println("-- Desafiante: " + desafio.getDesafiante());
+                            System.out.println("-- Personaje del enemigo: " + ((Cliente) data.getUsuarioByPos(data.getPosUsuario(desafio.getDesafiante()))).getPersonaje().getTipo());
+                            System.out.println("-- Oro apostado: " + desafio.getOroApostado());
+                            System.out.println("Elija que desea hacer:");
+                            System.out.println("1.- Aceptar desafio");
+                            System.out.println("2.- Rechazar desafio");
+                            opcion = input.nextInt();
+                            switch (opcion){
+                                case 1: combate.aceptarCombate(data, desafio);
+                                        break;
+                                case 2: combate.rechazarCombate(data);
+                                        break;
+                                default: System.out.println("\n--- Por favor seleccione una opcion correcta ---\n");
+                                         break;
+                            }
+                            } while (opcion != 1 && opcion != 2);
+                        }
                         System.out.println("Elija una opcion:");
                         System.out.println("1.- Cerrar sesion");
                         System.out.println("2.- Elegir equipo activo");
@@ -105,10 +124,6 @@ public class Sistema {
                 }
             } while (opcion != 1);
         }
-    }
-    
-    private void pantallaDesafio(Database data){
-        
     }
     
     public void registro(Database data){

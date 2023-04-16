@@ -24,6 +24,26 @@ public class Desafio {
         this.validado = false;
     }
 
+    public void setValidado(boolean validado) {
+        this.validado = validado;
+    }
+
+    public void setDebDesafiante(ArrayList<Debilidad> debDesafiante) {
+        this.debDesafiante = debDesafiante;
+    }
+
+    public void setFortDesafiante(ArrayList<Fortaleza> fortDesafiante) {
+        this.fortDesafiante = fortDesafiante;
+    }
+
+    public void setDebDesafiado(ArrayList<Debilidad> debDesafiado) {
+        this.debDesafiado = debDesafiado;
+    }
+
+    public void setFortDesafiado(ArrayList<Fortaleza> fortDesafiado) {
+        this.fortDesafiado = fortDesafiado;
+    }
+
     public boolean isValidado() {
         return validado;
     }
