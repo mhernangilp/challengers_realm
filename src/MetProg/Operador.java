@@ -191,13 +191,13 @@ public class Operador extends Usuario{
                 case 2: personaje.modificarArmadura();
                         break;
                 
-                case 3: break;
+                case 3:personaje.modificarHabilidades(personaje,data);
+                    break;
                 
                 case 4: personaje.modificarEsbirros();
+                break;
                 
-                case 5:
-                
-               personaje.modificarSalud(personaje);
+                case 5:personaje.modificarSalud(personaje);
                
                 
                     break;

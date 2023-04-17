@@ -284,14 +284,80 @@ public class Personaje {
             }
         } while (opcion != 4);
     }
-    public void modificarHabilidades(){
-    
+    public void modificarHabilidades(Personaje personaje, Database data){
+         Scanner input = new Scanner(System.in);
+        Integer opcion, modifAtaque, modifDefensa, sangre, rabia;
+        String nombre;
+        Habilidad habilidad;
+        Disciplina disciplina;
+        Don don;
+        Talento talento;
+        
+        System.out.println("La habilidad de su personaje es:" +personaje.habilidad.getNombre());
+        System.out.println("Ataque:"+personaje.habilidad.getAtaque());
+        System.out.println("Defensa:"+personaje.habilidad.getDefensa());
+         System.out.println("Escriba el nuevo valor de ataque: (rango 1-3,0 para no modificar este valor)");
+                            modifAtaque = input.nextInt();
+                            if (modifAtaque < 0 || modifAtaque > 3){
+                                System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                         
+                            }
+                            if (modifAtaque == 0){
+                                modifAtaque = personaje.habilidad.getAtaque();
+                            }
+                            
+         System.out.println("Escriba el nuevo valor de defensa: (rango 1-3,0 para no modificar este valor)");
+                            modifDefensa = input.nextInt();
+                            if (modifDefensa < 0 || modifDefensa > 3){
+                                System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                                
+                                
+                            }
+                            if (modifDefensa == 0){
+                                modifDefensa = personaje.habilidad.getDefensa();
+                            }
+            switch (personaje.habilidad.getNombre()){
+                case "Disciplina":
+              System.out.println("Escriba el nuevo valor de los puntos de sangre: (rango 1-3)");
+             sangre = input.nextInt();
+                            if (sangre < 0 || sangre > 3){
+                                System.out.println("\n--- Valor invalido, rango 1-3 ---\n");     
+                            }
+                           disciplina = new Disciplina(sangre,"Disciplina",modifAtaque,modifDefensa);
+                           personaje.habilidad = disciplina;
+                           System.out.println("La nueva habilidad es:"+ personaje.habilidad.getNombre());
+                           System.out.println("Ataque:"+personaje.habilidad.getAtaque());
+                           System.out.println("Defensa:"+personaje.habilidad.getDefensa());
+                           System.out.println("Puntos de sangre:"+sangre);
+                           break;
+                  
+            
+           
+                case "Don":
+           
+            System.out.println("Escriba el nuevo valor de rabia minimo)");
+            rabia = input.nextInt();
+                           don = new Don(rabia,"Disciplina",modifAtaque,modifDefensa);
+                           personaje.habilidad = don;
+                           System.out.println("La nueva habilidad es:"+ personaje.habilidad.getNombre());
+                           System.out.println("Ataque:"+personaje.habilidad.getAtaque());
+                           System.out.println("Defensa:"+personaje.habilidad.getDefensa());
+                           System.out.println("Rabia minima:"+rabia);
+                         break;
+                case "Talento":
+           
+               talento = new Talento("Talento",modifAtaque, modifDefensa);
+               personaje.habilidad = talento;
+               System.out.println("La nueva habilidad es:"+ personaje.habilidad.getNombre());
+               System.out.println("Ataque:"+personaje.habilidad.getAtaque());
+               System.out.println("Defensa:"+personaje.habilidad.getDefensa());
+              break;
+            
+  
+            }
+   
     
     }
-    
-    
-    
-    
     
     public void modificarEsbirros(){
         Scanner input = new Scanner(System.in);
@@ -443,6 +509,11 @@ public class Personaje {
             return nuevaSalud;
       
     
+    
+    
+    
+    }
+    public void modificarDebilidades (){
     
     
     
