@@ -41,7 +41,7 @@ public class Sistema {
                             case 2: ((Cliente) usuario).registrarPersonaje();
                                     break;
                             
-                            case 3: // ranking global
+                            case 3: ((Cliente) usuario).rankingGlobal(data);
                                     break;
                             
                             default:System.out.println("\n--- Por favor seleccione una opcion correcta ---\n");
@@ -90,7 +90,7 @@ public class Sistema {
                             case 4: // consultar historial
                                     break;
                             
-                            case 5: // ranking global
+                            case 5: ((Cliente) usuario).rankingGlobal(data);
                                     break;
                             
                             case 6: ((Cliente) usuario).darBajaPersonaje();

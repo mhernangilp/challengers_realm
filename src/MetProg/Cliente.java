@@ -1,6 +1,7 @@
 
 package MetProg;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -26,6 +27,36 @@ public class Cliente extends Usuario{
 
     public PersonajeUsuario getPersonaje() {
         return personaje;
+    }
+    
+    public void banear(){
+        this.baneado = true;
+    }
+    
+    public void rankingGlobal(Database data) {
+        ArrayList<Usuario> ArrayRanking = new ArrayList<Usuario>();
+        ArrayList<Usuario> listaData = data.getUsuarios();
+        for (int r = 0; r < listaData.size(); r++) {
+            if (listaData.get(r) instanceof Cliente) {
+                if (((Cliente) listaData.get(r)).getPersonaje() != null) {
+                    ArrayRanking.add(listaData.get(r));
+                }
+            }
+        }
+        int n = ArrayRanking.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (((Cliente) ArrayRanking.get(j)).getPersonaje().getOro() < ((Cliente) ArrayRanking.get(j+1)).getPersonaje().getOro()) {
+                    Usuario aux = ArrayRanking.get(j);
+                    ArrayRanking.set(j, ArrayRanking.get(j+1));
+                    ArrayRanking.set(j+1, aux);
+                }
+            }
+        }
+        for (int k = 0; k < n; k++) {
+            Cliente cliente = (Cliente) ArrayRanking.get(k);
+            System.out.println(k+1 + ". " + cliente.getNick() + " => " + cliente.getPersonaje().getOro() + " oro");
+        }
     }
     
     public void elegirEquipo(Database data, String tipo, Usuario usuario){
