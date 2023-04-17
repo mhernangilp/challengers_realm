@@ -513,12 +513,186 @@ public class Personaje {
     
     
     }
-    public void modificarDebilidades (){
+    public void modificarDebilidades (){ 
+        Scanner input = new Scanner(System.in);
+        Integer opcion, sensibilidad;
+        String nombre;
+        Debilidad debilidad;
+        
+        do {
+            System.out.println("Elija una opcion:");
+            System.out.println("1.- Añadir debilidad");
+            System.out.println("2.- Eliminar debilidad");
+            System.out.println("3.- Modificar debilidad");
+            System.out.println("4.- Volver");
+            opcion = input.nextInt();
+            input.nextLine();
+            switch (opcion){
+                case 1: System.out.println("Nombre de la nueva debilidad: ");
+                        nombre = input.nextLine();
+                        System.out.println("Sensibilidad del personaje a la debilidad: (rango 1-5)");
+                        sensibilidad = input.nextInt();
+                        if (sensibilidad < 1 || sensibilidad > 5){
+                            System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
+                            break;
+                        }
+                        debilidad = new Debilidad(nombre,sensibilidad);
+                        debilidades.add(debilidad);
+                        System.out.println("\n--- Debilidad añadida correctamente ---\n");
+                        break;
+
+                case 2: System.out.println("Escriba el numero de la debilidad que quiere eliminar:");
+               
+                        for  (int i = 0; i<debilidades.size(); i++){
+                            System.out.println("-- --");
+                            System.out.println(i+"--Nombre de la debilidad:"+debilidades.get(i).getNombre());
+                            System.out.println("Valor de la debilidad:"+ debilidades.get(i).getValor() );
+                        } 
+                      System.out.print("Escriba el número de la debilidad que quiere eliminar: ");
+                       int indice = input.nextInt();
+
+                       debilidades.remove(indice);
+                       System.out.println("Debilidad eliminada con exito");
+            
+                        break;
+                            
+                        
+        
+
+                case 3: System.out.println("Escriba el numero de la debilidad que quiere modificar:");
+                        for (int i = 0; i<debilidades.size(); i++){
+                            System.out.println(i+"--Nombre de la debilidad:"+ debilidades.get(i).getNombre() );
+                            System.out.println("Valor de la debilidad: " + debilidades.get(i).getValor());
+                           
+                        }
+                       int i = input.nextInt();
+                        if (debilidades.size()>i){
+                            String nuevoNombre;
+                            
+                            System.out.println("Escriba el nuevo nombre para esta debilidad: ('N' para no modificar este valor)");
+                            input.nextLine();
+                            nuevoNombre = input.nextLine();
+                            
+                            if (nuevoNombre.equals("N") || nuevoNombre.equals("n")){
+                                nuevoNombre = debilidades.get(i).getNombre();
+                            }
+                            System.out.println("Escriba el nuevo valor de la debilidad: (rango 1-5,0 para no modificar este valor)");
+                            sensibilidad = input.nextInt();
+                            if (sensibilidad < 0 || sensibilidad > 5){
+                                System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
+                                break;
+                            }
+                            if (sensibilidad == 0){
+                                sensibilidad = debilidades.get(i).getValor();
+                            }
+                          
+                            debilidad = new Debilidad(nuevoNombre, sensibilidad);
+                           
+                            debilidades.remove(i);
+                           debilidades.add(debilidad);
+                           
+                            System.out.println("\n--- Debilidad modificada correctamente ---\n");
+                        } else {
+                            System.out.println("Por favor escriba un numero de debilidad correcto\n");
+                        }
+                        break;
+
+               
+            }
+        } while (opcion != 4);
+    }
     
-    
+    public void modificarFortazlezas(){ 
+        Scanner input = new Scanner(System.in);
+        Integer opcion, eficacia;
+        String nombre;
+        Fortaleza fortaleza;
+        
+        do {
+            System.out.println("Elija una opcion:");
+            System.out.println("1.- Añadir fortazleza");
+            System.out.println("2.- Eliminar fortaleza");
+            System.out.println("3.- Modificar Fortaleza");
+            System.out.println("4.- Volver");
+            opcion = input.nextInt();
+            input.nextLine();
+            switch (opcion){
+                case 1: System.out.println("Nombre de la nueva fortaleza: ");
+                        nombre = input.nextLine();
+                        System.out.println("Eficacia de la fortaleza: (rango 1-5)");
+                        eficacia = input.nextInt();
+                        if (eficacia < 1 || eficacia > 5){
+                            System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
+                            break;
+                        }
+                        fortaleza= new Fortaleza(nombre,eficacia);
+                        fortalezas.add(fortaleza);
+                        System.out.println("\n--- Fortaleza añadida correctamente ---\n");
+                        break;
+
+                case 2: System.out.println("Escriba el numero de la fortaleza que quiere eliminar:");
+               
+                        for  (int i = 0; i<fortalezas.size(); i++){
+                            System.out.println("-- --");
+                            System.out.println(i+"--Nombre de la fortaleza:"+fortalezas.get(i).getNombre());
+                            System.out.println("Valor de la fortaleza:"+ fortalezas.get(i).getValor() );
+                        } 
+                      System.out.print("Escriba el número de la fortaleza que quiere eliminar: ");
+                       int indice = input.nextInt();
+
+                       fortalezas.remove(indice);
+                       System.out.println("Fortaleza eliminada con exito");
+            
+                        break;
+                            
+                        
+        
+
+                case 3: System.out.println("Escriba el numero de la fortaleza que quiere modificar:");
+                        for (int i = 0; i<debilidades.size(); i++){
+                            System.out.println(i+"--Nombre de la fortaleza:"+ fortalezas.get(i).getNombre() );
+                            System.out.println("Valor de la fortaleza: " + fortalezas.get(i).getValor());
+                           
+                        }
+                       int i = input.nextInt();
+                        if (fortalezas.size()>i){
+                            String nuevoNombre;
+                            
+                            System.out.println("Escriba el nuevo nombre para esta fortaleza: ('N' para no modificar este valor)");
+                            input.nextLine();
+                            nuevoNombre = input.nextLine();
+                            
+                            if (nuevoNombre.equals("N") || nuevoNombre.equals("n")){
+                                nuevoNombre = fortalezas.get(i).getNombre();
+                            }
+                            System.out.println("Escriba el nuevo valor de la eficacia: (rango 1-5,0 para no modificar este valor)");
+                            eficacia = input.nextInt();
+                            if (eficacia < 0 || eficacia > 5){
+                                System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
+                                break;
+                            }
+                            if (eficacia == 0){
+                                eficacia = fortalezas.get(i).getValor();
+                            }
+                          
+                            fortaleza = new Fortaleza(nuevoNombre, eficacia);
+                           
+                            fortalezas.remove(i);
+                           fortalezas.add(fortaleza);
+                           
+                            System.out.println("\n--- Fortaleza modificada correctamente ---\n");
+                        } else {
+                            System.out.println("Por favor escriba un numero de fortaleza correcto\n");
+                        }
+                        break;
+
+               
+            }
+        } while (opcion != 4);
+    }
     
     }
-}
+
    
 
 

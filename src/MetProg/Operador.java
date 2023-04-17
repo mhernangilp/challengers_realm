@@ -202,9 +202,11 @@ public class Operador extends Usuario{
                 
                     break;
                 
-                case 6: break;
+                case 6: personaje.modificarDebilidades();
+                    break;
                 
-                case 7: break;
+                case 7: personaje.modificarFortazlezas();
+                    break;
                 
                 default: break;
             }
