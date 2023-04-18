@@ -433,10 +433,11 @@ public class Personaje {
                                  confirmacion = input.nextInt();
                                  if (confirmacion==1){
                         System.out.println("Nombre del nuevo esbirro: ");
-                        nombre = input.nextLine();
                         input.nextLine();
+                        nombre = input.nextLine();
                         System.out.println("Salud: (rango 1-3)");
                         salud = input.nextInt();
+                        input.nextLine();
                         if (salud < 1 || salud > 3){
                             System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
                             break;
@@ -461,6 +462,7 @@ public class Personaje {
                                
                                 subesbirros.add(humano); 
                                 System.out.println("Humano añadidio al demonio correctamente");
+                                System.out.println(subesbirros.get(0).getNombre());
                                
                                 break;
                         
@@ -484,19 +486,21 @@ public class Personaje {
                                 demonio =new Demonio(pacto,subesbirros,nombre,salud);
                                 subesbirros.add(demonio);
                               
-                        }   
-                                 }else if(confirmacion ==0){
+                        }   }else if(confirmacion ==0){
                                      demonio = new Demonio(pacto,subesbirros,nombre,salud);
                                      esbirros.add(demonio);
                                     
-                        }else {
+                        }
+                                 else {
                                 System.out.println("Por favor escriba un valor entre 0 y 1");
                                 break;
                                
                                          }  
                                  
                              }while (confirmacion != 0);
-                        demonio = new Demonio(pacto,subesbirros,nombre,salud);
+                            
+                        for(int i= 0; i< subesbirros.size(); i++){
+                        System.out.println(subesbirros.get(i).getNombre());}
                         System.out.println("Demonio añadidio correctamente");
                         }    break;       
               
@@ -513,7 +517,13 @@ public class Personaje {
                        System.out.println("Esbirro eliminado con exito");
                            break;
                 
-                case 3: System.out.println("Escriba el esbirro que qiuera modificar");
+                case 3: System.out.println("Escriba el numero del esbirro que qiuera modificar");
+                        for (int i= 0; i< esbirros.size(); i++){
+                           System.out.println("-- --");
+                           System.out.println(i+"--Nombre:"+esbirros.get(i).getNombre());
+                           System.out.println("Salud:"+esbirros.get(i).getSalud());
+                                   System.out.println(esbirros.get(i));
+                           }
                 break;
                         }       
         }while (opcion !=4);
