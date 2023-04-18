@@ -367,6 +367,7 @@ public class Personaje {
         Humano humano;
         Ghoul ghoul;
         Demonio demonio;
+        ArrayList<Esbirro> subesbirros = new ArrayList<Esbirro>();
         
         
         do{ 
@@ -386,7 +387,7 @@ public class Personaje {
                             System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
                             break;
                         }
-                        System.out.println("Tipo de esbirro");
+                        System.out.println("Tipo de esbirro: (escriba el numero del tipo (1-3)");
                         System.out.println("1.-Humano");
                         System.out.println("2-Ghoul");
                         System.out.println("3-Demonio");
@@ -418,6 +419,7 @@ public class Personaje {
                                  ghoul = new Ghoul(dependencia, nombre, salud);
                                  esbirros.add(ghoul);
                                  System.out.println("Ghoul añadido correctamente");
+                                
                              
                                  break;
                             case 3: 
@@ -446,7 +448,7 @@ public class Personaje {
                         tipoesbirro = input.nextInt();
                         switch(tipoesbirro){ 
                             case 1:
-                                System.out.println("Valor de lealtad ");
+                                System.out.println("Valor de lealtad: (rango 1-3) ");
                                 System.out.println("1.-Baja");
                                 System.out.println("2.-Normal");
                                 System.out.println("3.-Alta");
@@ -456,8 +458,10 @@ public class Personaje {
                                     break;
                                 }
                                 humano = new Humano(lealtad, nombre, salud);
-                                esbirros.add(humano); 
-                                System.out.println("Humano añadidio correctamente");
+                               
+                                subesbirros.add(humano); 
+                                System.out.println("Humano añadidio al demonio correctamente");
+                               
                                 break;
                         
                             case 2: 
@@ -468,14 +472,23 @@ public class Personaje {
                                     break;
                                 }
                                  ghoul = new Ghoul(dependencia, nombre, salud);
-                                 esbirros.add(ghoul);
-                                 System.out.println("Ghoul añadido correctamente");
+                                 
+                                 subesbirros.add(ghoul);
+                                 
+                                 System.out.println("Ghoul añadido al demonio correctamente");
                                  break;
                             case 3: 
                                 System.out.println("Pacto entre demonio y amo");
                                 pacto = input.nextLine();
                                 input.nextLine();
-                        }      
+                                demonio =new Demonio(pacto,subesbirros,nombre,salud);
+                                subesbirros.add(demonio);
+                              
+                        }   
+                                 }else if(confirmacion ==0){
+                                     demonio = new Demonio(pacto,subesbirros,nombre,salud);
+                                     esbirros.add(demonio);
+                                    
                         }else {
                                 System.out.println("Por favor escriba un valor entre 0 y 1");
                                 break;
@@ -483,11 +496,21 @@ public class Personaje {
                                          }  
                                  
                              }while (confirmacion != 0);
+                        demonio = new Demonio(pacto,subesbirros,nombre,salud);
+                        System.out.println("Demonio añadidio correctamente");
                         }    break;       
               
                 case 2:
-                        System.out.println("Escriba el esbirro que quiera eliminar");
-                           for (int i= 0; i< esbirros.size(); i++){}
+                        System.out.println("Escriba el numero del esbirro que quiera eliminar");
+                           for (int i= 0; i< esbirros.size(); i++){
+                           System.out.println("-- --");
+                           System.out.println(i+"--Nombre:"+esbirros.get(i).getNombre());
+                           System.out.println("Salud:"+esbirros.get(i).getSalud());
+                           }
+                           int indice = input.nextInt();
+
+                       esbirros.remove(indice);
+                       System.out.println("Esbirro eliminado con exito");
                            break;
                 
                 case 3: System.out.println("Escriba el esbirro que qiuera modificar");
@@ -637,7 +660,7 @@ public class Personaje {
                             System.out.println(i+"--Nombre de la fortaleza:"+fortalezas.get(i).getNombre());
                             System.out.println("Valor de la fortaleza:"+ fortalezas.get(i).getValor() );
                         } 
-                      System.out.print("Escriba el número de la fortaleza que quiere eliminar: ");
+                     
                        int indice = input.nextInt();
 
                        fortalezas.remove(indice);
