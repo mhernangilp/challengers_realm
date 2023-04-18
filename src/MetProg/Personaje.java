@@ -521,14 +521,47 @@ public class Personaje {
                         for (int i= 0; i< esbirros.size(); i++){
                            System.out.println("-- --");
                            System.out.println(i+"--Nombre:"+esbirros.get(i).getNombre());
-                           System.out.println("Salud:"+esbirros.get(i).getSalud());
-                                   System.out.println(esbirros.get(i));
+                           System.out.println("Salud:"+esbirros.get(i).getSalud());}
+                           int i = input.nextInt();
+                        if (esbirros.size()>i){
+                            String nuevoNombre;
+                            
+                            System.out.println("Escriba el nuevo nombre para el esbirro: ('N' para no modificar este valor)");
+                            input.nextLine();
+                            nuevoNombre = input.nextLine();
+                            
+                            if (nuevoNombre.equals("N") || nuevoNombre.equals("n")){
+                                nuevoNombre = esbirros.get(i).getNombre();
+                            }
+                            System.out.println("Escriba el nuevo valor de salud: (rango 1-3,0 para no modificar este valor)");
+                             salud = input.nextInt();
+                            if (salud < 0 || salud > 3){
+                                System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
+                                break;
+                            }
+                            if (salud == 0){
+                                salud = esbirros.get(i).getSalud();
+                            }
+                          
+                            esbirro = new Esbirro(nuevoNombre, salud);
+                           
+                            esbirros.remove(i);
+                           esbirros.add(esbirro);
+                           
+                            System.out.println("\n--- Esbirro modificada correctamente ---\n");
+                        } else {
+                            System.out.println("Por favor escriba un numero de esbirro correcto\n");
+                        }
+                        break;
+
+                           
+                                  
                            }
                 break;
-                        }       
+                               
         }while (opcion !=4);
             
-        
+
         }
     public Integer modificarSalud(Personaje personaje){
         Scanner input = new Scanner(System.in);
