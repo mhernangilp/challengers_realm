@@ -106,6 +106,7 @@ public class Sistema {
                         System.out.println("2.- Editar personaje");
                         System.out.println("3.- Validar desafios");
                         System.out.println("4.- Banear usuarios");
+                        System.out.println("5.- Desbanear usuarios");
                         opcion = input.nextInt();
                         switch (opcion){
                             case 1: break;
@@ -116,7 +117,11 @@ public class Sistema {
                             case 3: ((Operador) usuario).validarDesafios(data);
                                     break;
                             
-                            case 4: break;
+                            case 4: ((Operador) usuario).banear(data);
+                                    break;
+                            
+                            case 5: ((Operador) usuario).desbanear(data);
+                                    break;
                             
                             default:System.out.println("\n--- Por favor seleccione una opcion correcta ---\n");
                                     break;

@@ -33,6 +33,10 @@ public class Cliente extends Usuario{
         this.baneado = true;
     }
     
+    public void desbanear(){
+        this.baneado = false;
+    }
+    
     public void rankingGlobal(Database data) {
         ArrayList<Usuario> ArrayRanking = new ArrayList<Usuario>();
         ArrayList<Usuario> listaData = data.getUsuarios();

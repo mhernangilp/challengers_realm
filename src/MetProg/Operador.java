@@ -212,4 +212,47 @@ public class Operador extends Usuario{
             }
         } while (opcion != 8);
     }
+    
+    public void banear (Database data) {
+        Scanner input = new Scanner (System.in);
+        Integer opcion;
+        
+        ArrayList<Usuario> listaData = data.getUsuarios();
+        for (int i = 0; i < listaData.size(); i++) {
+            if (listaData.get(i) instanceof Cliente) {
+                if (((Cliente) listaData.get(i)).getPersonaje() != null) {
+                    System.out.println(i + ": " + ((Cliente) listaData.get(i)).getNick());
+                } 
+            }
+        }
+        opcion = input.nextInt();
+        if (((Cliente) listaData.get(opcion)).isBaneado()){
+            System.out.println("Usuario ya baneado");
+        } else{
+            ((Cliente) listaData.get(opcion)).banear();
+            System.out.println("\n--- Usuario baneado correctamente ---\n");
+        }  
+    }
+    
+    public void desbanear (Database data) {
+        Scanner input = new Scanner (System.in);
+        Integer opcion;
+        
+        ArrayList<Usuario> listaData = data.getUsuarios();
+        for (int i = 0; i < listaData.size(); i++) {
+            if (listaData.get(i) instanceof Cliente) {
+                if (((Cliente) listaData.get(i)).isBaneado()) {
+                    System.out.println(i + ": " + ((Cliente) listaData.get(i)).getNick());
+                } 
+            }
+        }
+        opcion = input.nextInt();
+        if (!((Cliente) listaData.get(opcion)).isBaneado()){
+            System.out.println("Usuario no baneado");
+        } else{
+            ((Cliente) listaData.get(opcion)).desbanear();
+            System.out.println("\n--- Usuario desbaneado correctamente ---\n");
+        }  
+    }
 }
+
