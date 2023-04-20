@@ -48,18 +48,22 @@ public class Cliente extends Usuario{
             }
         }
         int n = ArrayRanking.size();
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (((Cliente) ArrayRanking.get(j)).getPersonaje().getOro() < ((Cliente) ArrayRanking.get(j+1)).getPersonaje().getOro()) {
-                    Usuario aux = ArrayRanking.get(j);
-                    ArrayRanking.set(j, ArrayRanking.get(j+1));
-                    ArrayRanking.set(j+1, aux);
+        if (n == 0) {
+            System.out.println("\n--- Ranking vacio ---\n");
+        } else {
+            for (int i = 0; i < n - 1; i++) {
+                for (int j = 0; j < n - i - 1; j++) {
+                    if (((Cliente) ArrayRanking.get(j)).getPersonaje().getOro() < ((Cliente) ArrayRanking.get(j+1)).getPersonaje().getOro()) {
+                        Usuario aux = ArrayRanking.get(j);
+                        ArrayRanking.set(j, ArrayRanking.get(j+1));
+                        ArrayRanking.set(j+1, aux);
+                    }
                 }
             }
-        }
-        for (int k = 0; k < n; k++) {
-            Cliente cliente = (Cliente) ArrayRanking.get(k);
-            System.out.println(k+1 + ". " + cliente.getNick() + " => " + cliente.getPersonaje().getOro() + " oro");
+            for (int k = 0; k < n; k++) {
+                Cliente cliente = (Cliente) ArrayRanking.get(k);
+                System.out.println(k+1 + ". " + cliente.getNick() + " => " + cliente.getPersonaje().getOro() + " oro");
+            }
         }
     }
     
