@@ -293,7 +293,7 @@ public class Personaje {
         Don don;
         Talento talento;
         
-        System.out.println("La habilidad de su personaje es:" +personaje.habilidad.getNombre());
+        System.out.println("La habilidad del personaje es:" +personaje.habilidad.getNombre());
         System.out.println("Ataque:"+personaje.habilidad.getAtaque());
         System.out.println("Defensa:"+personaje.habilidad.getDefensa());
          System.out.println("Escriba el nuevo valor de ataque: (rango 1-3,0 para no modificar este valor)");
@@ -394,7 +394,13 @@ public class Personaje {
                         tipoesbirro = input.nextInt();
                         switch(tipoesbirro){ 
                             case 1:
-                                System.out.println("Valor de lealtad ");
+                                if (this instanceof Vampiro){
+                                    System.out.println("Los vampiros no pueden tener esbirros humanos");
+                                    break;
+                                }
+                                else{
+                           
+                                System.out.println("Valor de lealtad (Rango 1-3) ");
                                 System.out.println("1.-Baja");
                                 System.out.println("2.-Normal");
                                 System.out.println("3.-Alta");
@@ -407,7 +413,7 @@ public class Personaje {
                                 esbirros.add(humano); 
                                 System.out.println("Humano añadidio correctamente");
                           ;
-                                break;
+                                } break;
                         
                             case 2: 
                                 System.out.println("Valor de dependencia:: (rango1-5 ");
@@ -563,16 +569,23 @@ public class Personaje {
             
 
         }
-    public Integer modificarSalud(Personaje personaje){
+    public void modificarSalud(Personaje personaje){
         Scanner input = new Scanner(System.in);
         Integer  nuevaSalud;
         System.out.println("La salud del personaje es:" +personaje.getSalud());
 
-            System.out.println("Escriba la nueva salud de su personaje");
+            System.out.println("Escriba la nueva salud del personaje: (Rango :0-5)");
             nuevaSalud = input.nextInt();
-            personaje.salud = nuevaSalud;
+            if (nuevaSalud < 0 || nuevaSalud > 5){
+                 System.out.println("Escriba un valor entre 0 y 5");
+           
+            }
+            else{
+               
+                 personaje.salud = nuevaSalud;
             System.out.println("La nueva salud de su personaje es:"+ personaje.getSalud());
-            return nuevaSalud;
+                
+            }
       
     
     
