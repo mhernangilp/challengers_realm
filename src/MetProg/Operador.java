@@ -37,7 +37,7 @@ public class Operador extends Usuario{
         do {
             ArrayList<Debilidad> debilidades = desafio.getDebDesafiante();
             System.out.println("Seleccione las debilidades de el desafiante '" + desafio.getDesafiante() + "' quedeben estar presentes en este combate: (-1 para continuar)");
-            System.out.println("Tipo de personaje del contrincante: " + ((Cliente) data.getUsuarioByPos(data.getPosUsuario(desafio.getDesafiado()))).getPersonaje().getTipo());
+            System.out.println("Tipo de personaje del contrincante: " + ((Cliente) data.getUsuarioByNick(desafio.getDesafiado())).getPersonaje().getTipo());
             for (int i = 0; i < debilidades.size(); i++){
                 System.out.println(i + ":");
                 System.out.println("    Nombre: " + debilidades.get(i).getNombre());
@@ -64,7 +64,7 @@ public class Operador extends Usuario{
         do {
             ArrayList<Fortaleza> fortalezas = desafio.getFortDesafiante();
             System.out.println("Seleccione las fortalezas de el desafiante '" + desafio.getDesafiante() + "' quedeben estar presentes en este combate: (-1 para continuar)");
-            System.out.println("Tipo de personaje del contrincante: " + ((Cliente) data.getUsuarioByPos(data.getPosUsuario(desafio.getDesafiado()))).getPersonaje().getTipo());
+            System.out.println("Tipo de personaje del contrincante: " + ((Cliente) data.getUsuarioByNick(desafio.getDesafiado())).getPersonaje().getTipo());
             for (int i = 0; i < fortalezas.size(); i++){
                 System.out.println(i + ":");
                 System.out.println("    Nombre: " + fortalezas.get(i).getNombre());
@@ -91,7 +91,7 @@ public class Operador extends Usuario{
         do {
             ArrayList<Debilidad> debilidades = desafio.getDebDesafiado();
             System.out.println("Seleccione las debilidades de el desafiado '" + desafio.getDesafiado() + "' quedeben estar presentes en este combate: (-1 para continuar)");
-            System.out.println("Tipo de personaje del contrincante: " + ((Cliente) data.getUsuarioByPos(data.getPosUsuario(desafio.getDesafiante()))).getPersonaje().getTipo());
+            System.out.println("Tipo de personaje del contrincante: " + ((Cliente) data.getUsuarioByNick(desafio.getDesafiante())).getPersonaje().getTipo());
             for (int i = 0; i < debilidades.size(); i++){
                 System.out.println(i + ":");
                 System.out.println("    Nombre: " + debilidades.get(i).getNombre());
@@ -118,7 +118,7 @@ public class Operador extends Usuario{
         do {
             ArrayList<Fortaleza> fortalezas = desafio.getFortDesafiado();
             System.out.println("Seleccione las fortalezas de el desafiado '" + desafio.getDesafiado() + "' quedeben estar presentes en este combate: (-1 para continuar)");
-            System.out.println("Tipo de personaje del contrincante: " + ((Cliente) data.getUsuarioByPos(data.getPosUsuario(desafio.getDesafiante()))).getPersonaje().getTipo());
+            System.out.println("Tipo de personaje del contrincante: " + ((Cliente) data.getUsuarioByNick(desafio.getDesafiante())).getPersonaje().getTipo());
             for (int i = 0; i < fortalezas.size(); i++){
                 System.out.println(i + ":");
                 System.out.println("    Nombre: " + fortalezas.get(i).getNombre());

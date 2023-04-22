@@ -201,7 +201,7 @@ public class Cliente extends Usuario{
             System.out.println("\n--- No existe ningun usuario con ese nick ---\n");
             return ;
         }
-        if (data.getUsuarioByPos(data.getPosUsuario(nick)) instanceof Operador){
+        if (data.getUsuarioByNick(nick) instanceof Operador){
             System.out.println("\n--- Este usuario es un operador, no se le puede desafiar ---\n");
             return ;
         }
@@ -223,7 +223,7 @@ public class Cliente extends Usuario{
             default: tipoDesafiante = null;
                      break;
         }
-        switch (((Cliente) data.getUsuarios().get(data.getPosUsuario(nick))).getPersonaje().getTipo()){
+        switch (((Cliente) data.getUsuarioByNick(nick)).getPersonaje().getTipo()){
             case "Vampiro": tipoDesafiado = 0;
                             break;
         

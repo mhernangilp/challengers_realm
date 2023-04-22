@@ -14,8 +14,9 @@ public class Personaje {
     private Integer salud;
     private ArrayList<Debilidad> debilidades;
     private ArrayList<Fortaleza> fortalezas;
+    private Integer poder;
 
-    public Personaje(Habilidad habilidad, HashMap<String, Arma> armas, HashMap<String, Armadura> armaduras, ArrayList<Esbirro> esbirros, Integer salud, ArrayList<Debilidad> debilidades, ArrayList<Fortaleza> fortalezas) {
+    public Personaje(Habilidad habilidad, HashMap<String, Arma> armas, HashMap<String, Armadura> armaduras, ArrayList<Esbirro> esbirros, Integer salud, ArrayList<Debilidad> debilidades, ArrayList<Fortaleza> fortalezas, Integer poder) {
         this.habilidad = habilidad;
         this.armas = armas;
         this.armaduras = armaduras;
@@ -23,6 +24,11 @@ public class Personaje {
         this.salud = salud;
         this.debilidades = debilidades;
         this.fortalezas = fortalezas;
+        this.poder = poder;
+    }
+
+    public Integer getPoder() {
+        return poder;
     }
 
     public Habilidad getHabilidad() {

@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Sistema {
-    public void logIn(Database data){
+    public void logIn(Database data) throws Exception{
         Scanner input = new Scanner(System.in);
         String nick;
         String contraseña;
@@ -22,7 +22,7 @@ public class Sistema {
             System.out.println("\n--- Contraseña incorrecta ---\n");
         } else {
             System.out.println("\n--- Inicio de sesión correcto ---\n");
-            Usuario usuario = data.getUsuarioByPos(data.getPosUsuario(nick));
+            Usuario usuario = data.getUsuarioByNick(nick);
             do {
                 if (usuario instanceof Cliente){
                     if (((Cliente) usuario).isBaneado()){
@@ -54,7 +54,7 @@ public class Sistema {
                             do {
                             System.out.println("¡¡ Tienes un desafio nuevo!!");
                             System.out.println("-- Desafiante: " + desafio.getDesafiante());
-                            System.out.println("-- Personaje del enemigo: " + ((Cliente) data.getUsuarioByPos(data.getPosUsuario(desafio.getDesafiante()))).getPersonaje().getTipo());
+                            System.out.println("-- Personaje del enemigo: " + ((Cliente) data.getUsuarioByNick(desafio.getDesafiante())).getPersonaje().getTipo());
                             System.out.println("-- Oro apostado: " + desafio.getOroApostado());
                             System.out.println("Elija que desea hacer:");
                             System.out.println("1.- Aceptar desafio");
@@ -202,7 +202,7 @@ public class Sistema {
         } else if (!data.checkNickPass(nick, contraseña)){
             System.out.println("\n--- Contraseña incorrecta ---\n");
         } else {
-            data.eliminarUsuario(data.getPosUsuario(nick));
+            data.eliminarUsuario(nick);
             System.out.println("\n--- Usuario eliminado correctamente ---\n");
         }
     }
