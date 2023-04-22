@@ -374,7 +374,7 @@ public class Personaje {
             System.out.println("Elija una opcion:");
             System.out.println("1.- Añadir esbirros");
             System.out.println("2.- Eliminar esbirros");
-            System.out.println("3.- Modificar armadura");
+            System.out.println("3.- Modificar esbirros");
             System.out.println("4.- Volver");
             opcion = input.nextInt();
             input.nextLine();
@@ -416,7 +416,7 @@ public class Personaje {
                                 } break;
                         
                             case 2: 
-                                System.out.println("Valor de dependencia:: (rango1-5 ");
+                                System.out.println("Valor de dependencia: (rango 1-5) ");
                                 dependencia = input.nextInt();
                                  if (dependencia < 1 || dependencia >5){
                                     System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
@@ -433,9 +433,9 @@ public class Personaje {
                                 pacto = input.nextLine();
                                 input.nextLine();
                                 
-                              
+                             
                         do{
-                                 System.out.println("Desea añadir esbirros al demonio(1 para añadir esbirros, 0 para no añadir)");
+                                 System.out.println("Desea añadir mas esbirros al demonio(1 para añadir esbirros, 0 para no añadir)");
                                  confirmacion = input.nextInt();
                                  if (confirmacion==1){
                         System.out.println("Nombre del nuevo esbirro: ");
@@ -465,10 +465,10 @@ public class Personaje {
                                     break;
                                 }
                                 humano = new Humano(lealtad, nombre, salud);
-                               
+                                
                                 subesbirros.add(humano); 
                                 System.out.println("Humano añadidio al demonio correctamente");
-                                System.out.println(subesbirros.get(0).getNombre());
+                                
                                
                                 break;
                         
@@ -505,8 +505,7 @@ public class Personaje {
                                  
                              }while (confirmacion != 0);
                             
-                        for(int i= 0; i< subesbirros.size(); i++){
-                        System.out.println(subesbirros.get(i).getNombre());}
+                      
                         System.out.println("Demonio añadidio correctamente");
                         }    break;       
               
@@ -516,6 +515,7 @@ public class Personaje {
                            System.out.println("-- --");
                            System.out.println(i+"--Nombre:"+esbirros.get(i).getNombre());
                            System.out.println("Salud:"+esbirros.get(i).getSalud());
+                          
                            }
                            int indice = input.nextInt();
 
@@ -523,11 +523,12 @@ public class Personaje {
                        System.out.println("Esbirro eliminado con exito");
                            break;
                 
-                case 3: System.out.println("Escriba el numero del esbirro que qiuera modificar");
+                case 3: System.out.println("Escriba el numero del esbirro que quiera modificar");
                         for (int i= 0; i< esbirros.size(); i++){
                            System.out.println("-- --");
                            System.out.println(i+"--Nombre:"+esbirros.get(i).getNombre());
-                           System.out.println("Salud:"+esbirros.get(i).getSalud());}
+                           System.out.println("Salud:"+esbirros.get(i).getSalud());
+                        }
                            int i = input.nextInt();
                         if (esbirros.size()>i){
                             String nuevoNombre;
@@ -542,19 +543,140 @@ public class Personaje {
                             System.out.println("Escriba el nuevo valor de salud: (rango 1-3,0 para no modificar este valor)");
                              salud = input.nextInt();
                             if (salud < 0 || salud > 3){
-                                System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
+                                System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
                                 break;
                             }
                             if (salud == 0){
                                 salud = esbirros.get(i).getSalud();
                             }
-                          
-                            esbirro = new Esbirro(nuevoNombre, salud);
+                               if(esbirros.get(i) instanceof Humano){
+                            Humano human = (Humano) esbirros.get(i);
+                           System.out.println("Lealtad:"+ human.getLealtad());
+                           System.out.println("Escriba el nuevo valor de lealtad: (rango 1-3,0 para no modificar este valor)");
+                             lealtad = input.nextInt();
+                            if (lealtad < 0 || lealtad > 3){
+                                System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                                break;
+                            }
+                            if (lealtad == 0){
+                                lealtad = human.getLealtad();
+                            }
+                                  humano = new Humano(lealtad,nuevoNombre,salud);
+                                  esbirros.remove(i);
+                                  esbirros.add(humano);
+                        }
+                        if(esbirros.get(i) instanceof Ghoul){
+                        Ghoul ghou = (Ghoul) esbirros.get(i);
+                        System.out.println("Dependencia:"+ghou.getDependencia());
+                         System.out.println("Escriba el nuevo valor de dependencia: (rango 1-5,0 para no modificar este valor)");
+                             dependencia = input.nextInt();
+                            if (dependencia < 1 || dependencia > 5){
+                                System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
+                                break;
+                            }
+                            if (dependencia == 0){
+                                lealtad = ghou.getDependencia();
+                            }
+                                  ghou = new Ghoul(dependencia,nuevoNombre,salud);
+                                  esbirros.remove(i);
+                                  esbirros.add(ghou);
+                        }
+                        if (esbirros.get(i) instanceof Demonio){
+                            Demonio demon = (Demonio) esbirros.get(i);
+                            System.out.println("Pacto entre demonio y amo:"+ demon.getPacto());
+                             System.out.println("Escriba el nuevo pacto: (N para no modificar este valor)");
+                             input.nextLine();
+                           pacto = input.nextLine();
+                            
+                            if (pacto.equals("N") || pacto.equals("n")){
+                                pacto = demon.getPacto();
+                            }
+                            for (int j= 0; j< demon.getEsbirros().size(); j++){
+                                System.out.println("Nombre subesbrro:"+demon.getEsbirros().get(j).getNombre());
+                                System.out.println("Salud:"+ demon.getEsbirros().get(j).getSalud());
+                                String nombreSub;
+                                 System.out.println("Escriba el nuevo nombre para el subesbirro: ('N' para no modificar este valor)");
+                            
+                            nombreSub = input.nextLine();
+                            
+                            if (nombreSub.equals("N") || nombreSub.equals("n")){
+                                nombreSub = demon.getEsbirros().get(j).getNombre();
+                            }
+                            System.out.println("Escriba el nuevo valor de salud: (rango 1-3,0 para no modificar este valor)");
+                             
+                            int saludSub = input.nextInt();
+                            if (saludSub < 0 || saludSub > 3){
+                                System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                                break;
+                            }
+                            if (saludSub == 0){
+                                saludSub = demon.getEsbirros().get(j).getSalud();
+                            }
+                            if (demon.getEsbirros().get(j) instanceof Humano){ 
+                                Humano subhuman = (Humano) demon.getEsbirros().get(j);
+                           System.out.println("Lealtad:"+ subhuman.getLealtad());
+                           System.out.println("Escriba el nuevo valor de lealtad: (rango 1-3,0 para no modificar este valor)");
+                             lealtad = input.nextInt();
+                            if (lealtad < 0 || lealtad > 3){
+                                System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                                break;
+                            }
+                            if (lealtad == 0){
+                                lealtad = subhuman.getLealtad();
+                            }
+                                  humano = new Humano(lealtad,nuevoNombre,salud);
+                                  demon.getEsbirros().remove(j);
+                                  demon.getEsbirros().add(humano);
+                        }
+                        if(demon.getEsbirros().get(j) instanceof Ghoul){
+                        Ghoul subghou = (Ghoul) demon.getEsbirros().get(j);
+                        System.out.println("Dependencia:"+subghou.getDependencia());
+                         System.out.println("Escriba el nuevo valor de dependencia: (rango 1-5,0 para no modificar este valor)");
+                             dependencia = input.nextInt();
+                            if (dependencia < 1 || dependencia > 5){
+                                System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
+                                break;
+                            }
+                            if (dependencia == 0){
+                                lealtad = subghou.getDependencia();
+                            }
+                                  ghoul = new Ghoul(dependencia,nuevoNombre,salud);
+                                 demon.getEsbirros().remove(j);
+                                  demon.getEsbirros().add(ghoul);
+                        }
+                        if (demon.getEsbirros().get(j) instanceof Demonio){
+                            Demonio subdemon = (Demonio) demon.getEsbirros().get(j);
+                            System.out.println("Pacto entre demonio y amo:"+ subdemon.getPacto());
+                             System.out.println("Escriba el nuevo pacto: (N para no modificar este valor)");
+                             input.nextLine();
+                           pacto = input.nextLine();
+                            if (pacto.equals("N") || pacto.equals("n")){
+                                pacto = demon.getPacto();
+                            }
+                            
+                            subesbirros = demon.getEsbirros();
+                            
                            
-                            esbirros.remove(i);
-                           esbirros.add(esbirro);
+                            
+                            
+                            }
+                        demonio = new Demonio(pacto, subesbirros, nuevoNombre,salud);
+                        esbirros.remove(i);
+                        esbirros.add(demonio);
+                            
+                            
+                            
+                            
+                            }
+                            
+                        
+                        
+                        }
+                        
+                        
                            
-                            System.out.println("\n--- Esbirro modificada correctamente ---\n");
+                       
+                            System.out.println("\n--- Esbirro modificado correctamente ---\n");
                         } else {
                             System.out.println("Por favor escriba un numero de esbirro correcto\n");
                         }
