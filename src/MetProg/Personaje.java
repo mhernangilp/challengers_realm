@@ -374,7 +374,91 @@ public class Personaje {
    
     
     }
-    
+   public void anadirSubesbirros(ArrayList<Esbirro> subesbirros){ 
+       Scanner input = new Scanner(System.in);
+       Humano humano;
+       Ghoul ghoul;
+       Demonio demonio;
+       String nombre, pacto;
+       Integer tipoesbirro, lealtad,dependencia,confirmacion;
+       
+       
+                        System.out.println("Nombre del nuevo esbirro: ");
+                        nombre = input.nextLine();
+                        System.out.println("Salud: (rango 1-3)");
+                        salud = input.nextInt();
+                        input.nextLine();
+                        if (salud < 1 || salud > 3){
+                            System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                            
+                        }
+                        System.out.println("Tipo de esbirro");
+                        System.out.println("1.-Humano");
+                        System.out.println("2-Ghoul");
+                        System.out.println("3-Demonio");
+                        tipoesbirro = input.nextInt();
+                        switch(tipoesbirro){ 
+                            case 1:
+                                System.out.println("Valor de lealtad: (rango 1-3) ");
+                                System.out.println("1.-Baja");
+                                System.out.println("2.-Normal");
+                                System.out.println("3.-Alta");
+                                lealtad = input.nextInt();
+                                if (lealtad < 1 || lealtad >3){
+                                    System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                                    break;
+                                }
+                                humano = new Humano(lealtad, nombre, salud);
+                                
+                                subesbirros.add(humano); 
+                                System.out.println("Humano añadidio al demonio correctamente");
+                                
+                               
+                                break;
+                        
+                            case 2: 
+                                System.out.println("Valor de dependencia:: (rango1-5 ");
+                                dependencia = input.nextInt();
+                                 if (dependencia < 1 || dependencia >5){
+                                    System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
+                                    break;
+                                }
+                                 ghoul = new Ghoul(dependencia, nombre, salud);
+                                 
+                                 subesbirros.add(ghoul);
+                                 
+                                 System.out.println("Ghoul añadido al demonio correctamente");
+                                 break;
+                            case 3: 
+                                System.out.println("Pacto entre demonio y amo");
+                                pacto = input.nextLine();
+                                input.nextLine();
+                            do{
+                                 System.out.println("Desea añadir mas esbirros al demonio(1 para añadir esbirros, 0 para no añadir)");
+                                 confirmacion = input.nextInt();
+                                 if (confirmacion==1){
+                                     this.anadirSubesbirros(subesbirros);
+                     
+                           }else if(confirmacion ==0){
+                                     demonio = new Demonio(pacto,subesbirros,nombre,salud);
+                                     esbirros.add(demonio);
+                                    
+                        }
+                                 else {
+                                System.out.println("Por favor escriba un valor entre 0 y 1");
+                                break;
+                               
+                                         }  
+                                 
+                             }while (confirmacion != 0);
+                            
+                      
+                        System.out.println("Demonio añadidio correctamente");
+                        }           
+              
+                    
+                              
+   }
     public void modificarEsbirros(){
         Scanner input = new Scanner(System.in);
         Integer opcion, salud, tipoesbirro, lealtad, dependencia, confirmacion;
@@ -454,61 +538,9 @@ public class Personaje {
                                  System.out.println("Desea añadir mas esbirros al demonio(1 para añadir esbirros, 0 para no añadir)");
                                  confirmacion = input.nextInt();
                                  if (confirmacion==1){
-                        System.out.println("Nombre del nuevo esbirro: ");
-                        input.nextLine();
-                        nombre = input.nextLine();
-                        System.out.println("Salud: (rango 1-3)");
-                        salud = input.nextInt();
-                        input.nextLine();
-                        if (salud < 1 || salud > 3){
-                            System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
-                            break;
-                        }
-                        System.out.println("Tipo de esbirro");
-                        System.out.println("1.-Humano");
-                        System.out.println("2-Ghoul");
-                        System.out.println("3-Demonio");
-                        tipoesbirro = input.nextInt();
-                        switch(tipoesbirro){ 
-                            case 1:
-                                System.out.println("Valor de lealtad: (rango 1-3) ");
-                                System.out.println("1.-Baja");
-                                System.out.println("2.-Normal");
-                                System.out.println("3.-Alta");
-                                lealtad = input.nextInt();
-                                if (lealtad < 1 || lealtad >3){
-                                    System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
-                                    break;
-                                }
-                                humano = new Humano(lealtad, nombre, salud);
-                                
-                                subesbirros.add(humano); 
-                                System.out.println("Humano añadidio al demonio correctamente");
-                                
-                               
-                                break;
-                        
-                            case 2: 
-                                System.out.println("Valor de dependencia:: (rango1-5 ");
-                                dependencia = input.nextInt();
-                                 if (dependencia < 1 || dependencia >5){
-                                    System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
-                                    break;
-                                }
-                                 ghoul = new Ghoul(dependencia, nombre, salud);
-                                 
-                                 subesbirros.add(ghoul);
-                                 
-                                 System.out.println("Ghoul añadido al demonio correctamente");
-                                 break;
-                            case 3: 
-                                System.out.println("Pacto entre demonio y amo");
-                                pacto = input.nextLine();
-                                input.nextLine();
-                                demonio =new Demonio(pacto,subesbirros,nombre,salud);
-                                subesbirros.add(demonio);
-                              
-                        }   }else if(confirmacion ==0){
+                                     this.anadirSubesbirros(subesbirros);
+                     
+                           }else if(confirmacion ==0){
                                      demonio = new Demonio(pacto,subesbirros,nombre,salud);
                                      esbirros.add(demonio);
                                     
