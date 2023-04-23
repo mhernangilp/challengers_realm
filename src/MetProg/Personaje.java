@@ -302,7 +302,14 @@ public class Personaje {
         System.out.println("La habilidad del personaje es:" +personaje.habilidad.getNombre());
         System.out.println("Ataque:"+personaje.habilidad.getAtaque());
         System.out.println("Defensa:"+personaje.habilidad.getDefensa());
-         System.out.println("Escriba el nuevo valor de ataque: (rango 1-3,0 para no modificar este valor)");
+         System.out.println("Escriba el nuevo nombre para esta habilidad: ('N' para no modificar este valor)");
+        String nuevoNombre = input.nextLine();
+                            if (nuevoNombre.equals("N") || nuevoNombre.equals("n")){
+                                nuevoNombre = personaje.habilidad.getNombre();
+                            }
+       
+        
+        System.out.println("Escriba el nuevo valor de ataque: (rango 1-3,0 para no modificar este valor)");
                             modifAtaque = input.nextInt();
                             if (modifAtaque < 0 || modifAtaque > 3){
                                 System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
@@ -322,45 +329,48 @@ public class Personaje {
                             if (modifDefensa == 0){
                                 modifDefensa = personaje.habilidad.getDefensa();
                             }
-            switch (personaje.habilidad.getNombre()){
-                case "Disciplina":
+            if(this instanceof Vampiro){
+             disciplina = (Disciplina) personaje.habilidad;
+              System.out.println("Puntos de sangre:" + disciplina.getCosteSangre());
               System.out.println("Escriba el nuevo valor de los puntos de sangre: (rango 1-3)");
              sangre = input.nextInt();
                             if (sangre < 0 || sangre > 3){
                                 System.out.println("\n--- Valor invalido, rango 1-3 ---\n");     
                             }
-                           disciplina = new Disciplina(sangre,"Disciplina",modifAtaque,modifDefensa);
+                           disciplina = new Disciplina(sangre,nuevoNombre,modifAtaque,modifDefensa);
                            personaje.habilidad = disciplina;
                            System.out.println("La nueva habilidad es:"+ personaje.habilidad.getNombre());
                            System.out.println("Ataque:"+personaje.habilidad.getAtaque());
                            System.out.println("Defensa:"+personaje.habilidad.getDefensa());
                            System.out.println("Puntos de sangre:"+sangre);
-                           break;
-                  
-            
+                     
+            }
            
-                case "Don":
-           
-            System.out.println("Escriba el nuevo valor de rabia minimo)");
+        
+            if (this instanceof Licantropo){
+                don = (Don) personaje.habilidad;
+             System.out.println("Valor de rabia minimo:" + don.getCosteRabia());
+             System.out.println("Escriba el nuevo valor de rabia minimo)");
             rabia = input.nextInt();
-                           don = new Don(rabia,"Disciplina",modifAtaque,modifDefensa);
+                           don = new Don(rabia,nuevoNombre,modifAtaque,modifDefensa);
                            personaje.habilidad = don;
                            System.out.println("La nueva habilidad es:"+ personaje.habilidad.getNombre());
                            System.out.println("Ataque:"+personaje.habilidad.getAtaque());
                            System.out.println("Defensa:"+personaje.habilidad.getDefensa());
-                           System.out.println("Rabia minima:"+rabia);
-                         break;
-                case "Talento":
+                           System.out.println("Rabia minima:"+rabia);}
            
-               talento = new Talento("Talento",modifAtaque, modifDefensa);
+                           
+              
+           if (this instanceof Cazador){
+               talento = new Talento(nuevoNombre,modifAtaque, modifDefensa);
                personaje.habilidad = talento;
                System.out.println("La nueva habilidad es:"+ personaje.habilidad.getNombre());
                System.out.println("Ataque:"+personaje.habilidad.getAtaque());
                System.out.println("Defensa:"+personaje.habilidad.getDefensa());
-              break;
+           }
             
   
-            }
+            
    
     
     }
