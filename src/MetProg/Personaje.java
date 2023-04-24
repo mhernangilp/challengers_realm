@@ -355,7 +355,7 @@ public class Personaje {
             }
     }
     
-    public void anadirSubesbirros(ArrayList<Esbirro> subesbirros){ 
+    private void anadirSubesbirros(ArrayList<Esbirro> subesbirros){ 
         Scanner input = new Scanner(System.in);
         Humano humano;
         Ghoul ghoul;
@@ -420,7 +420,9 @@ public class Personaje {
                     else {
                         System.out.println("Por favor escriba un valor entre 0 y 1");
                         break;
+                    
                     }
+                    
                 } while (confirmacion != 0);
                 System.out.println("Demonio añadidio correctamente");
                 break;
@@ -508,7 +510,7 @@ public class Personaje {
                                     else {
                                         System.out.println("Por favor escriba un valor entre 0 y 1");
                                         break;
-                                    } 
+                                          } 
                                 } while (confirmacion != 0);
                                 System.out.println("Demonio añadidio correctamente");
                         }
@@ -667,6 +669,7 @@ public class Personaje {
                             System.out.println("Por favor escriba un numero de esbirro correcto\n");
                         }
                         break;
+                default:break;
             }            
         } while (opcion !=4);
     }
@@ -760,6 +763,7 @@ public class Personaje {
                             System.out.println("Por favor escriba un numero de debilidad correcto\n");
                         }
                         break;
+                default:break;
             }
         } while (opcion != 4);
     }
@@ -835,6 +839,7 @@ public class Personaje {
                             System.out.println("Por favor escriba un numero de fortaleza correcto\n");
                         }
                         break;
+                default:break;
             }
         } while (opcion != 4);
     }
