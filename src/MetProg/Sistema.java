@@ -61,14 +61,9 @@ public class Sistema {
                             System.out.println("2.- Rechazar desafio");
                             opcion = input.nextInt();
                             switch (opcion){
-                                case 1: if (((Cliente)data.getUsuarioByNick(desafio.getDesafiado())).getPersonaje().getArmaActiva()[0] == null
-                                                || ((Cliente)data.getUsuarioByNick(desafio.getDesafiado())).getPersonaje().getArmaduraActiva() == null){
-                                            System.out.println("\n--- Para poder aceptar un desafio debe tener un equipo activo, seleccionelo para poder continuar: ---\n");
-                                            ((Cliente)data.getUsuarioByNick(desafio.getDesafiado())).elegirEquipo(data, ((Cliente) usuario).getPersonaje().getTipo());
-                                        }
-                                        combate.aceptarCombate(data, desafio);
+                                case 1: combate.aceptarCombate(data, desafio);
                                         break;
-                                case 2: combate.rechazarCombate(data);
+                                case 2: combate.rechazarCombate(data, desafio);
                                         break;
                                 default: System.out.println("\n--- Por favor seleccione una opcion correcta ---\n");
                                          break;
@@ -86,7 +81,7 @@ public class Sistema {
                         switch (opcion){
                             case 1: break;
                             
-                            case 2: ((Cliente) usuario).elegirEquipo(data, ((Cliente) usuario).getPersonaje().getTipo());
+                            case 2: ((Cliente) usuario).elegirEquipo(data, ((Cliente) usuario).getPersonaje().getTipo(), usuario);
                                     break;
                             
                             case 3: ((Cliente) usuario).desafiarUsuario(data);

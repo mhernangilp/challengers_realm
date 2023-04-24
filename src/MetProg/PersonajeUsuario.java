@@ -20,6 +20,14 @@ public class PersonajeUsuario {
         this.oro = 1000;
     }
 
+    public void setOro(long oro) {
+        this.oro = oro;
+    }
+
+    public void setHistorial(ArrayList<Historial> historial) {
+        this.historial = historial;
+    }
+
     public String getTipo() {
         return tipo;
     }

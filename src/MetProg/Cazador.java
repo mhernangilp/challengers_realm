@@ -15,6 +15,10 @@ public class Cazador extends Personaje{
     public Integer getVoluntad() {
         return voluntad;
     }
+
+    public void setVoluntad(Integer voluntad) {
+        this.voluntad = voluntad;
+    }
     
     
 }

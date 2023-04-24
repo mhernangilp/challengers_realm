@@ -67,7 +67,7 @@ public class Cliente extends Usuario{
         }
     }
     
-    public void elegirEquipo(Database data, String tipo){
+    public void elegirEquipo(Database data, String tipo, Usuario usuario){
         Scanner input = new Scanner(System.in);
         String opcion;
         Personaje personajeData;
@@ -89,7 +89,7 @@ public class Cliente extends Usuario{
         }
         HashMap<String, Arma> armas = personajeData.getArmas();
         HashMap<String, Armadura> armaduras = personajeData.getArmaduras();
-        String[] armaActiva = ((Cliente) this).getPersonaje().getArmaActiva();
+        String[] armaActiva = ((Cliente) usuario).getPersonaje().getArmaActiva();
         double peso = 0;
         int i = 0;
         if (armaActiva[0] == null){
@@ -102,10 +102,10 @@ public class Cliente extends Usuario{
                 System.out.println();
             }
         }
-        if (((Cliente) this).getPersonaje().getArmaduraActiva() == null){
+        if (((Cliente) usuario).getPersonaje().getArmaduraActiva() == null){
             System.out.println("\n--Armadura Activa: Ninguna\n");
         } else {
-            System.out.println("\n--Armadura Activa: " + ((Cliente) this).getPersonaje().getArmaduraActiva() + "\n");
+            System.out.println("\n--Armadura Activa: " + ((Cliente) usuario).getPersonaje().getArmaduraActiva() + "\n");
         }
         System.out.println("Elegir arma: (Escribir su nombre)");
         do {
@@ -143,7 +143,7 @@ public class Cliente extends Usuario{
             }
             opcion = input.nextLine();
             if (armaduras.containsKey(opcion)){
-                ((Cliente) this).getPersonaje().setArmaduraActiva(opcion);
+                ((Cliente) usuario).getPersonaje().setArmaduraActiva(opcion);
             } else {
                 System.out.println("Por favor escriba un nombre de armadura correcto\n");
             }
@@ -195,26 +195,14 @@ public class Cliente extends Usuario{
         Desafio desafio;
         long oroApostado;
         
-        if (this.getPersonaje().getArmaActiva()[0] == null || this.getPersonaje().getArmaduraActiva() == null){
-            System.out.println("\n--- Seleccione equipo activo antes de desafiar un jugador ---\n");
-            return ;
-        }
         System.out.println("Escriba el nick al usuario al que desea desafiar:");
         nick = input.nextLine();
         if (!data.checkNick(nick)){
             System.out.println("\n--- No existe ningun usuario con ese nick ---\n");
             return ;
         }
-        if(nick.equals(this.getNick())){
-            System.out.println("\n--- No se puede desafiar a si mismo ---\n");
-            return ;
-        }
         if (data.getUsuarioByNick(nick) instanceof Operador){
             System.out.println("\n--- Este usuario es un operador, no se le puede desafiar ---\n");
-            return ;
-        }
-        if (((Cliente) data.getUsuarioByNick(nick)).getPersonaje().getTipo() == null){
-            System.out.println("\n--- El usuario seleccionado no tiene ningun personaje registrado ---\n");
             return ;
         }
         System.out.println("Cuanto oro desea apostar:");
