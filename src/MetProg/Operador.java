@@ -19,6 +19,10 @@ public class Operador extends Usuario{
         ArrayList<Debilidad> debilidadesDesafiado = new ArrayList<Debilidad>();
         ArrayList<Fortaleza> fortalezasDesafiado = new ArrayList<Fortaleza>();
         
+        if (desafios.size() == 0){
+            System.out.println("\n--- No hay desafios para validar en estos momentos ---\n");
+            return ;
+        }
         System.out.println("Selecione un desafio:");
         for (int i = 0; i < desafios.size(); i++){
             if (!desafios.get(i).isValidado()){
@@ -52,14 +56,16 @@ public class Operador extends Usuario{
                 }
             }
             opcion2 = input.nextInt();
-            if (opcion2 < -1 || opcion2 > debilidades.size() - 1){
-                System.out.println("\n--- Opcion incorrecta ---\n");
-                return ;
-            }
             if (opcion2 == -1){
                 break ;
             }
-            debilidadesDesafiante.add(debilidades.get(opcion2));
+            if (opcion2 < -1 || opcion2 > debilidades.size() - 1){
+                System.out.println("\n--- Opcion incorrecta ---\n");
+            } else if (debilidadesDesafiante.contains(debilidades.get(opcion2))){
+                System.out.println("\n--- Opcion ya escogida ---\n");
+            } else {
+                debilidadesDesafiante.add(debilidades.get(opcion2));
+            }
         } while (opcion2 != -1);
         do {
             ArrayList<Fortaleza> fortalezas = desafio.getFortDesafiante();
@@ -79,14 +85,16 @@ public class Operador extends Usuario{
                 }
             }
             opcion2 = input.nextInt();
-            if (opcion2 < -1 || opcion2 > fortalezas.size() - 1){
-                System.out.println("\n--- Opcion incorrecta ---\n");
-                return ;
-            }
             if (opcion2 == -1){
                 break ;
             }
-            fortalezasDesafiante.add(fortalezas.get(opcion2));
+            if (opcion2 < -1 || opcion2 > fortalezas.size() - 1){
+                System.out.println("\n--- Opcion incorrecta ---\n");
+            } else if(fortalezasDesafiante.contains(fortalezas.get(opcion2))){
+                System.out.println("\n--- Opcion ya escogida ---\n");
+            } else {
+                fortalezasDesafiante.add(fortalezas.get(opcion2));
+            }
         } while (opcion2 != -1);
         do {
             ArrayList<Debilidad> debilidades = desafio.getDebDesafiado();
@@ -106,14 +114,16 @@ public class Operador extends Usuario{
                 }
             }
             opcion2 = input.nextInt();
-            if (opcion2 < -1 || opcion2 > debilidades.size() - 1){
-                System.out.println("\n--- Opcion incorrecta ---\n");
-                return ;
-            }
             if (opcion2 == -1){
                 break ;
             }
-            debilidadesDesafiado.add(debilidades.get(opcion2));
+            if (opcion2 < -1 || opcion2 > debilidades.size() - 1){
+                System.out.println("\n--- Opcion incorrecta ---\n");
+            } else if (debilidadesDesafiado.contains(debilidades.get(opcion2))){
+                System.out.println("\n--- Opcion ya escogida ---\n");
+            } else {
+                debilidadesDesafiado.add(debilidades.get(opcion2));
+            }
         } while (opcion2 != -1);
         do {
             ArrayList<Fortaleza> fortalezas = desafio.getFortDesafiado();
@@ -133,14 +143,16 @@ public class Operador extends Usuario{
                 }
             }
             opcion2 = input.nextInt();
-            if (opcion2 < -1 || opcion2 > fortalezas.size() - 1){
-                System.out.println("\n--- Opcion incorrecta ---\n");
-                return ;
-            }
             if (opcion2 == -1){
                 break ;
             }
-            fortalezasDesafiado.add(fortalezas.get(opcion2));
+            if (opcion2 < -1 || opcion2 > fortalezas.size() - 1){
+                System.out.println("\n--- Opcion incorrecta ---\n");
+            } else if (fortalezasDesafiado.contains(fortalezas.get(opcion2))){
+                System.out.println("\n--- Opcion ya escogida ---\n");
+            } else {
+                fortalezasDesafiado.add(fortalezas.get(opcion2));
+            }
         } while (opcion2 != -1);
         desafio.setDebDesafiante(debilidadesDesafiante);
         desafio.setFortDesafiante(fortalezasDesafiante);
