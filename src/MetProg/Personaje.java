@@ -75,6 +75,7 @@ public class Personaje implements Serializable{
             opcion = input.nextInt();
             input.nextLine();
             switch (opcion){
+                //se añade un nuevo arma
                 case 1: System.out.println("Nombre del nuevo arma: ");
                         nombre = input.nextLine();
                         System.out.println("Modificador de ataque: (rango 1-3)");
@@ -103,7 +104,7 @@ public class Personaje implements Serializable{
                         armas.put(nombre, arma);
                         System.out.println("\n--- Arma añadida correctamente ---\n");
                         break;
-
+                // se borra el arma a partir de su nombre, el usuario debera escribir el nombre por consola
                 case 2: System.out.println("Escriba el arma que quiere eliminar:");
                         for (Map.Entry<String, Arma> entry : armas.entrySet()){
                             System.out.println("-- '" + entry.getKey() + "':");
@@ -116,6 +117,7 @@ public class Personaje implements Serializable{
                             }
                         }
                         nombre = input.nextLine();
+                        // se comprueba que el nombre del arma es correcto y se borra el arma
                         if (armas.containsKey(nombre)){
                             armas.remove(nombre);
                             System.out.println("\n--- Arma eliminada correctamente ---\n");
@@ -123,7 +125,9 @@ public class Personaje implements Serializable{
                             System.out.println("Por favor escriba un nombre de arma correcto\n");
                         }
                         break;
-
+                // se modifica el arma a partir del nombre, al igual que al eliminar
+                // el usuario podrá modificar cualquier atributo del arma o dejarlo comno esta
+                // si el usuario decide no modificar algun atributo, se mantendrá igual
                 case 3: System.out.println("Escriba el arma que quiere modificar:");
                         for (Map.Entry<String, Arma> entry : armas.entrySet()){
                             System.out.println("-- '" + entry.getKey() + "':");
@@ -180,6 +184,7 @@ public class Personaje implements Serializable{
                             } else {
                                 arma = new Arma(nuevoNombre, modifAtaque, modifDefensa, 1);
                             }
+                            // se borra el arma antigua y se añade una nueva con los nuevos atributos
                             armas.remove(nombre);
                             armas.put(nuevoNombre, arma);
                             System.out.println("\n--- Arma modificada correctamente ---\n");
@@ -208,6 +213,7 @@ public class Personaje implements Serializable{
             opcion = input.nextInt();
             input.nextLine();
             switch (opcion){
+                // todos las funciones se hacen de igual manera que con las armas
                 case 1: System.out.println("Nombre de la nueva armadura: ");
                         nombre = input.nextLine();
                         System.out.println("Modificador de ataque: (rango 1-3)");
@@ -299,10 +305,15 @@ public class Personaje implements Serializable{
         Disciplina disciplina;
         Don don;
         Talento talento;
-        
+        //se recibe la habilidad del personaje y se ofrece la posibilidad de cambiar los atributos o dejarlos igual
         System.out.println("La habilidad del personaje es:" +personaje.habilidad.getNombre());
         System.out.println("Ataque:"+personaje.habilidad.getAtaque());
         System.out.println("Defensa:"+personaje.habilidad.getDefensa());
+        System.out.println("Escriba el nuevo nombre para esta habilidad: ('N' para no modificar este valor)");
+        String nuevoNombre = input.nextLine();
+                            if (nuevoNombre.equals("N") || nuevoNombre.equals("n")){
+                                nuevoNombre = personaje.habilidad.getNombre();
+                            }
          System.out.println("Escriba el nuevo valor de ataque: (rango 1-3,0 para no modificar este valor)");
                             modifAtaque = input.nextInt();
                             if (modifAtaque < 0 || modifAtaque > 3){
@@ -323,48 +334,139 @@ public class Personaje implements Serializable{
                             if (modifDefensa == 0){
                                 modifDefensa = personaje.habilidad.getDefensa();
                             }
-            switch (personaje.habilidad.getNombre()){
-                case "Disciplina":
+             //se comprobara el tipo del personaje seleccionado y se mostraran los atributos propios de la habilidad del tipo de personaje
+              if(this instanceof Vampiro){
+              disciplina = (Disciplina) personaje.habilidad;
+              System.out.println("Puntos de sangre:" + disciplina.getCosteSangre());
               System.out.println("Escriba el nuevo valor de los puntos de sangre: (rango 1-3)");
-             sangre = input.nextInt();
+              sangre = input.nextInt();
                             if (sangre < 0 || sangre > 3){
                                 System.out.println("\n--- Valor invalido, rango 1-3 ---\n");     
                             }
-                           disciplina = new Disciplina(sangre,"Disciplina",modifAtaque,modifDefensa);
+                           disciplina = new Disciplina(sangre,nuevoNombre,modifAtaque,modifDefensa);
                            personaje.habilidad = disciplina;
                            System.out.println("La nueva habilidad es:"+ personaje.habilidad.getNombre());
                            System.out.println("Ataque:"+personaje.habilidad.getAtaque());
                            System.out.println("Defensa:"+personaje.habilidad.getDefensa());
                            System.out.println("Puntos de sangre:"+sangre);
-                           break;
+                   
                   
-            
+              }
            
-                case "Don":
-           
-            System.out.println("Escriba el nuevo valor de rabia minimo)");
-            rabia = input.nextInt();
-                           don = new Don(rabia,"Disciplina",modifAtaque,modifDefensa);
+            if (this instanceof Licantropo){
+                             don = (Don) personaje.habilidad;
+                             System.out.println("Valor de rabia minimo:" + don.getCosteRabia());
+                             System.out.println("Escriba el nuevo valor de rabia minimo)");
+                             rabia = input.nextInt();
+                           don = new Don(rabia,nuevoNombre,modifAtaque,modifDefensa);
                            personaje.habilidad = don;
                            System.out.println("La nueva habilidad es:"+ personaje.habilidad.getNombre());
                            System.out.println("Ataque:"+personaje.habilidad.getAtaque());
                            System.out.println("Defensa:"+personaje.habilidad.getDefensa());
                            System.out.println("Rabia minima:"+rabia);
-                         break;
-                case "Talento":
+                   
+            }
            
-               talento = new Talento("Talento",modifAtaque, modifDefensa);
+             if (this instanceof Cazador){
+               talento = new Talento(nuevoNombre,modifAtaque, modifDefensa);
                personaje.habilidad = talento;
                System.out.println("La nueva habilidad es:"+ personaje.habilidad.getNombre());
                System.out.println("Ataque:"+personaje.habilidad.getAtaque());
                System.out.println("Defensa:"+personaje.habilidad.getDefensa());
-              break;
+             }
             
   
-            }
+            
    
     
     }
+    
+     private void anadirSubesbirros(ArrayList<Esbirro> subesbirros){ 
+       Scanner input = new Scanner(System.in);
+       Humano humano;
+       Ghoul ghoul;
+       Demonio demonio;
+       String nombre, pacto;
+       Integer tipoesbirro, lealtad,dependencia,confirmacion;
+
+                     // la siguiente funcion tiene como onjetivo añadir esbirros a los demonios
+                        System.out.println("Nombre del nuevo esbirro: ");
+                        nombre = input.nextLine();
+                        System.out.println("Salud: (rango 1-3)");
+                        salud = input.nextInt();
+                        input.nextLine();
+                        if (salud < 1 || salud > 3){
+                            System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+
+                        }
+                        System.out.println("Tipo de esbirro");
+                        System.out.println("1.-Humano");
+                        System.out.println("2-Ghoul");
+                        System.out.println("3-Demonio");
+                        tipoesbirro = input.nextInt();
+                        switch(tipoesbirro){ 
+                            case 1:
+                                System.out.println("Valor de lealtad: (rango 1-3) ");
+                                System.out.println("1.-Baja");
+                                System.out.println("2.-Normal");
+                                System.out.println("3.-Alta");
+                                lealtad = input.nextInt();
+                                if (lealtad < 1 || lealtad >3){
+                                    System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
+                                    break;
+                                }
+                                humano = new Humano(lealtad, nombre, salud);
+
+                                subesbirros.add(humano); 
+                                System.out.println("Humano añadidio al demonio correctamente");
+
+
+                                break;
+
+                            case 2: 
+                                System.out.println("Valor de dependencia:: (rango1-5 ");
+                                dependencia = input.nextInt();
+                                 if (dependencia < 1 || dependencia >5){
+                                    System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
+                                    break;
+                                }
+                                 ghoul = new Ghoul(dependencia, nombre, salud);
+
+                                 subesbirros.add(ghoul);
+
+                                 System.out.println("Ghoul añadido al demonio correctamente");
+                                 break;
+                            case 3: 
+                                System.out.println("Pacto entre demonio y amo");
+                                pacto = input.nextLine();
+                                input.nextLine();
+                            do{
+                                 System.out.println("Desea añadir mas esbirros al demonio(1 para añadir esbirros, 0 para no añadir)");
+                                 confirmacion = input.nextInt();
+                                 if (confirmacion==1){
+                                     // en el caso de que añadamos un demonio al demonio se podra añadir 
+                                     this.anadirSubesbirros(subesbirros);
+
+                           }else if(confirmacion ==0){
+                                     demonio = new Demonio(pacto,subesbirros,nombre,salud);
+                                     esbirros.add(demonio);
+
+                        }
+                                 else {
+                                System.out.println("Por favor escriba un valor entre 0 y 1");
+                                break;
+
+                                         }  
+
+                             }while (confirmacion != 0);
+
+
+                        System.out.println("Demonio añadidio correctamente");
+                        }           
+
+
+
+   }
     
     public void modificarEsbirros(){
         Scanner input = new Scanner(System.in);
@@ -441,65 +543,14 @@ public class Personaje implements Serializable{
                                 input.nextLine();
                                 
                              
-                        do{
+                        do{     // el siguiente bucle se repetirá hasta que el usuario pulse 0
+                                // esto hará que se añadan tantos esbirros al demonio como el usuario quiera
                                  System.out.println("Desea añadir mas esbirros al demonio(1 para añadir esbirros, 0 para no añadir)");
                                  confirmacion = input.nextInt();
                                  if (confirmacion==1){
-                        System.out.println("Nombre del nuevo esbirro: ");
-                        input.nextLine();
-                        nombre = input.nextLine();
-                        System.out.println("Salud: (rango 1-3)");
-                        salud = input.nextInt();
-                        input.nextLine();
-                        if (salud < 1 || salud > 3){
-                            System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
-                            break;
-                        }
-                        System.out.println("Tipo de esbirro");
-                        System.out.println("1.-Humano");
-                        System.out.println("2-Ghoul");
-                        System.out.println("3-Demonio");
-                        tipoesbirro = input.nextInt();
-                        switch(tipoesbirro){ 
-                            case 1:
-                                System.out.println("Valor de lealtad: (rango 1-3) ");
-                                System.out.println("1.-Baja");
-                                System.out.println("2.-Normal");
-                                System.out.println("3.-Alta");
-                                lealtad = input.nextInt();
-                                if (lealtad < 1 || lealtad >3){
-                                    System.out.println("\n--- Valor invalido, rango 1-3 ---\n");
-                                    break;
-                                }
-                                humano = new Humano(lealtad, nombre, salud);
-                                
-                                subesbirros.add(humano); 
-                                System.out.println("Humano añadidio al demonio correctamente");
-                                
-                               
-                                break;
+                                     this.anadirSubesbirros(subesbirros);
                         
-                            case 2: 
-                                System.out.println("Valor de dependencia:: (rango1-5 ");
-                                dependencia = input.nextInt();
-                                 if (dependencia < 1 || dependencia >5){
-                                    System.out.println("\n--- Valor invalido, rango 1-5 ---\n");
-                                    break;
-                                }
-                                 ghoul = new Ghoul(dependencia, nombre, salud);
-                                 
-                                 subesbirros.add(ghoul);
-                                 
-                                 System.out.println("Ghoul añadido al demonio correctamente");
-                                 break;
-                            case 3: 
-                                System.out.println("Pacto entre demonio y amo");
-                                pacto = input.nextLine();
-                                input.nextLine();
-                                demonio =new Demonio(pacto,subesbirros,nombre,salud);
-                                subesbirros.add(demonio);
-                              
-                        }   }else if(confirmacion ==0){
+                           }else if(confirmacion ==0){
                                      demonio = new Demonio(pacto,subesbirros,nombre,salud);
                                      esbirros.add(demonio);
                                     
@@ -688,11 +739,12 @@ public class Personaje implements Serializable{
                             System.out.println("Por favor escriba un numero de esbirro correcto\n");
                         }
                         break;
+                default:break;
 
                            
                                   
                            }
-                break;
+             
                                
         }while (opcion !=4);
             
@@ -702,7 +754,7 @@ public class Personaje implements Serializable{
         Scanner input = new Scanner(System.in);
         Integer  nuevaSalud;
         System.out.println("La salud del personaje es:" +personaje.getSalud());
-
+        // la funcion recibirá como parametro al perosnaje del que se quiere modificar la salud
             System.out.println("Escriba la nueva salud del personaje: (Rango :0-5)");
             nuevaSalud = input.nextInt();
             if (nuevaSalud < 0 || nuevaSalud > 5){
@@ -804,6 +856,8 @@ public class Personaje implements Serializable{
                             System.out.println("Por favor escriba un numero de debilidad correcto\n");
                         }
                         break;
+                default:break;
+                     
 
                
             }
@@ -893,6 +947,7 @@ public class Personaje implements Serializable{
                             System.out.println("Por favor escriba un numero de fortaleza correcto\n");
                         }
                         break;
+                default:break;
 
                
             }
