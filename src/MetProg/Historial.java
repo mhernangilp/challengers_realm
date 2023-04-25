@@ -1,11 +1,12 @@
 
 package MetProg;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class Historial {
+public class Historial implements Serializable{
     private String usuarioDesafiante;
     private String usuarioDesafiado;
     private Integer rondasEmpleadas;

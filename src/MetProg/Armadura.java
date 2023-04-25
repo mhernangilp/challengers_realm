@@ -1,7 +1,9 @@
 
 package MetProg;
 
-public class Armadura {
+import java.io.Serializable;
+
+public class Armadura implements Serializable{
     private String nombre;
     private Integer modifAtaque;
     private Integer modifDefensa;

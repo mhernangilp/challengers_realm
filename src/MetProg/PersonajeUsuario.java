@@ -1,9 +1,10 @@
 
 package MetProg;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PersonajeUsuario {
+public class PersonajeUsuario implements Serializable{
     private String tipo;
     private String nombre;
     private String[] armaActiva;

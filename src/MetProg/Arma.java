@@ -1,7 +1,9 @@
 
 package MetProg;
 
-public class Arma {
+import java.io.Serializable;
+
+public class Arma implements Serializable{
     private String nombre;
     private Integer modifAtaque;
     private Integer modifDefensa;

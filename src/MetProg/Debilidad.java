@@ -1,7 +1,9 @@
 
 package MetProg;
 
-public class Debilidad {
+import java.io.Serializable;
+
+public class Debilidad implements Serializable{
     private String nombre;
     private Integer valor;
 

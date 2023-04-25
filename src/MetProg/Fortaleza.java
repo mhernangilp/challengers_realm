@@ -1,7 +1,9 @@
 
 package MetProg;
 
-public class Fortaleza {
+import java.io.Serializable;
+
+public class Fortaleza implements Serializable{
     private String nombre;
     private Integer valor;
 

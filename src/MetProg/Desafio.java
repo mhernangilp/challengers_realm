@@ -1,9 +1,10 @@
 
 package MetProg;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Desafio {
+public class Desafio implements Serializable{
     private boolean validado;
     private String desafiante;
     private ArrayList<Debilidad> debDesafiante;

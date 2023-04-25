@@ -1,16 +1,27 @@
 
 package MetProg;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Scanner;
 
 public class ProgramManager {
     public void pantallaInicial() throws Exception{
-        Database data = new Database();
+        Database data;
         Sistema sistema = new Sistema();
         Integer opcion = 0;
         Scanner input = new Scanner(System.in);
-        
-        data.inicializarPersonajes();
+        File file = new File("data/database.data");
+
+        if(file.exists()) {
+            data = this.loadData();
+        } else {
+            data = new Database();
+            data.inicializarPersonajes();
+        }
         while (opcion != 4){
             System.out.println("-----------------------");
             System.out.println("  .: Bienvenido !! :.");
@@ -33,6 +44,14 @@ public class ProgramManager {
 
             default: break;
             }
+            data.saveData();
         }
+    }
+    
+    private Database loadData() throws FileNotFoundException, IOException, ClassNotFoundException{
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream("data/database.data"));
+        Database data = (Database) in.readObject();
+        in.close();
+        return data;
     }
 }

@@ -1,12 +1,13 @@
 
 package MetProg;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Personaje {
+public class Personaje implements Serializable{
     private Habilidad habilidad;
     private HashMap<String, Arma> armas;
     private HashMap<String, Armadura> armaduras;

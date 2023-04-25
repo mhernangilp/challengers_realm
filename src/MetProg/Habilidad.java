@@ -1,7 +1,9 @@
 
 package MetProg;
 
-public class Habilidad {
+import java.io.Serializable;
+
+public class Habilidad implements Serializable{
     private String nombre;
     private Integer ataque;
     private Integer defensa;

@@ -1,7 +1,9 @@
 
 package MetProg;
 
-public class Esbirro {
+import java.io.Serializable;
+
+public class Esbirro implements Serializable{
     private String nombre;
     private Integer salud;
 

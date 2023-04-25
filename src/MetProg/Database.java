@@ -1,12 +1,15 @@
 
 package MetProg;
 
-import java.lang.reflect.Constructor;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import static java.util.function.Predicate.not;
 
-public class Database {
+public class Database implements Serializable{
     private ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
     private ArrayList<Desafio> desafios = new ArrayList<Desafio>();
     private Personaje[] personajes;
@@ -41,12 +44,10 @@ public class Database {
         return desafios;
     }
     
-    public void loadData(){
-        
-    }
-    
-    public void saveData(){
-        
+    public void saveData() throws FileNotFoundException, IOException{
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/database.data"));
+        out.writeObject(this);
+        out.close();
     }
     
     public void inicializarPersonajes(){
