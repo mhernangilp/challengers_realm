@@ -1,6 +1,7 @@
 
 package MetProg;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +52,7 @@ public class Cliente extends Usuario{
         if (n == 0) {
             System.out.println("\n--- Ranking vacio ---\n");
         } else {
+            System.out.println();
             for (int i = 0; i < n - 1; i++) {
                 for (int j = 0; j < n - i - 1; j++) {
                     if (((Cliente) ArrayRanking.get(j)).getPersonaje().getOro() < ((Cliente) ArrayRanking.get(j+1)).getPersonaje().getOro()) {
@@ -64,7 +66,39 @@ public class Cliente extends Usuario{
                 Cliente cliente = (Cliente) ArrayRanking.get(k);
                 System.out.println(k+1 + ". " + cliente.getNick() + " => " + cliente.getPersonaje().getOro() + " oro");
             }
+            System.out.println();
         }
+    }
+    
+    public void consultarHistorial(){
+        ArrayList<Historial> historial = personaje.getHistorial();
+        
+        if (historial.size() == 0){
+            System.out.println("\n--- Historial vacio ---\n");
+        }
+        for (int i = 0; i < historial.size(); i++){
+            System.out.println("\n" + i + ":");
+            System.out.println("    Usuario desafiante: " + historial.get(i).getUsuarioDesafiante());
+            System.out.println("    Usuario desafiado: " + historial.get(i).getUsuarioDesafiado());
+            System.out.println("    Rondas Empleadas: " + historial.get(i).getRondasEmpleadas());
+            SimpleDateFormat ft = new SimpleDateFormat ("dd/MM/yyyy");
+            System.out.println("    Fecha Combate: " + ft.format(historial.get(i).getFechaCombate()));
+            System.out.println("    Usuario Vencedor: " + historial.get(i).getUsuarioVencedor());
+            System.out.print("    El desafiante termino con algun esbirro sin derrotar: ");
+            if (historial.get(i).getEsbirroSinDerrotar()[0] == 1){
+                System.out.println("Si");
+            } else {
+                System.out.println("No");
+            }
+            System.out.print("    El desafiado termino con algun esbirro sin derrotar: ");
+            if (historial.get(i).getEsbirroSinDerrotar()[1] == 1){
+                System.out.println("Si");
+            } else {
+                System.out.println("No");
+            }
+            System.out.println("    Oro ganado: " + historial.get(i).getOroGanado());
+        }
+        System.out.println();
     }
     
     public void elegirEquipo(Database data, String tipo){

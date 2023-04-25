@@ -68,7 +68,7 @@ public class Sistema {
                                         }
                                         combate.aceptarCombate(data, desafio);
                                         break;
-                                case 2: combate.rechazarCombate(data);
+                                case 2: combate.rechazarCombate(data, desafio);
                                         break;
                                 default: System.out.println("\n--- Por favor seleccione una opcion correcta ---\n");
                                          break;
@@ -92,7 +92,7 @@ public class Sistema {
                             case 3: ((Cliente) usuario).desafiarUsuario(data);
                                     break;
                             
-                            case 4: // consultar historial
+                            case 4: ((Cliente) usuario).consultarHistorial();
                                     break;
                             
                             case 5: ((Cliente) usuario).rankingGlobal(data);

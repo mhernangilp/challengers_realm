@@ -50,7 +50,7 @@ public class Combate {
         opcion = opcion.toUpperCase();
         
         switch (opcion){
-            case "SI": c2.elegirEquipo(data, pUs2.getTipo(), c2);
+            case "SI": c2.elegirEquipo(data, pUs2.getTipo());
                     break;
             case "NO":
                     break;
@@ -70,7 +70,7 @@ public class Combate {
         while (saludDesafiante[0] > 0 && saludDesafiado[0] > 0) {
             jugarRonda(pjDesafiante, pjDesafiado, saludDesafiante, saludDesafiado, pUs1, pUs2, ronda, desafio);
         }
-        
+        this.terminarCombate(data, desafio);
     }
     
     private void jugarRonda(Personaje p1, Personaje p2, int[] s1, int[] s2, PersonajeUsuario pUsuario1, PersonajeUsuario pUsuario2, Integer ronda, Desafio desafio) {
@@ -92,6 +92,9 @@ public class Combate {
         // Al potencial del desafiado
         setModificadores(potAtaq2, desafio.getDesafiado(), desafio);
         setModificadores(potDef2, desafio.getDesafiado(), desafio);
+        
+        // Se suma 1 a la ronda
+        ronda += 1;
         
         // 2.- Calcular tantos numeros aleatorios entre 1 y 6
         
@@ -182,24 +185,36 @@ public class Combate {
                     c1.setVoluntad(0);
                 }
             }
-        }
-        
-        // 4.- Comprobar quien ha ganado
-        
-        if (s1[0] == 0 && s2[0] == 0) {
-            System.out.println("EMPATE");
-        } else if (s1[0] == 0) {
-            System.out.println("HA GANADO EL DESAFIADO (P2)");
-        } else if (s2[0] == 0){
-            System.out.println("HA GANADO EL DESAFIANTE (P1)");
-        } else {
-            ronda = ronda + 1;
-        }
-        
+        }        
     }
     
-    private void terminarCombate(Database data) {
+    private void terminarCombate(Database data, Desafio desafio) {
+        int[] esbirroSinDerrotar = new int[2];
+        Historial log;
         
+        if (saludDesafiante[1] == 0){
+            esbirroSinDerrotar[0] = 0;
+        } else{
+            esbirroSinDerrotar[0] = 1;
+        }
+        if (saludDesafiado[1] == 0){
+            esbirroSinDerrotar[1] = 0;
+        } else{
+            esbirroSinDerrotar[1] = 1;
+        }
+        if (saludDesafiante[0] == 0 && saludDesafiado[0] == 0) {
+            System.out.println("EMPATE");
+            log = new Historial(desafio.getDesafiante(), desafio.getDesafiado(), ronda, "EMPATE", esbirroSinDerrotar, desafio.getOroApostado());
+        } else if (saludDesafiante[0] == 0) {
+            System.out.println("HA GANADO EL DESAFIADO (P2)");
+            log = new Historial(desafio.getDesafiante(), desafio.getDesafiado(), ronda, desafio.getDesafiado(), esbirroSinDerrotar, desafio.getOroApostado());
+        } else {
+            System.out.println("HA GANADO EL DESAFIANTE (P1)");
+            log = new Historial(desafio.getDesafiante(), desafio.getDesafiado(), ronda, desafio.getDesafiante(), esbirroSinDerrotar, desafio.getOroApostado());
+        }
+        ((Cliente) data.getUsuarioByNick(desafio.getDesafiado())).getPersonaje().getHistorial().add(log);
+        ((Cliente) data.getUsuarioByNick(desafio.getDesafiante())).getPersonaje().getHistorial().add(log);
+        data.eliminarDesafio(desafio);
     }
     
     public void rechazarCombate(Database data, Desafio desafio){

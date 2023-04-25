@@ -4,7 +4,7 @@ package MetProg;
 import java.util.Scanner;
 
 public class ProgramManager {
-    public void pantallaInicial(){
+    public void pantallaInicial() throws Exception{
         Database data = new Database();
         Sistema sistema = new Sistema();
         Integer opcion = 0;
@@ -22,16 +22,16 @@ public class ProgramManager {
             System.out.println("4.- Salir del sistema");
             opcion = input.nextInt();
             switch (opcion){
-                case 1: sistema.logIn(data);
-                        break;
-                
-                case 2: sistema.registro(data);
-                        break;
-                
-                case 3: sistema.darDeBaja(data);
-                        break;
-                
-                default: break;
+            case 1: sistema.logIn(data);
+                    break;
+
+            case 2: sistema.registro(data);
+                    break;
+
+            case 3: sistema.darDeBaja(data);
+                    break;
+
+            default: break;
             }
         }
     }

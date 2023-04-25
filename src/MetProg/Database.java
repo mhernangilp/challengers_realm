@@ -197,6 +197,10 @@ public class Database {
         return (-1);
     }
     
+    public void eliminarDesafio(Desafio desafio){
+        desafios.remove(desafio);
+    }
+    
     public Usuario getUsuarioByNick(String nick) {
         int i = 0;
         boolean found = false;
