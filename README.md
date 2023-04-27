@@ -1,3 +1,3 @@
 # Practica1_MP
 
-Practica MP josemaric
+Practica MP
