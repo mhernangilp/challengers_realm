@@ -4,6 +4,7 @@ package MetProg;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Combate {
     private Personaje pjDesafiante;
@@ -43,7 +44,7 @@ public class Combate {
         PersonajeUsuario pUs2 = c2.getPersonaje();
         
         System.out.println("Desafio aceptado >:)");
-        System.out.println("\nDesea cambiar sus armas o armaduras? (si/no)\n");
+        System.out.println("\nDesea cambiar sus armas o armaduras? (si/no)");
         
         Scanner sc = new Scanner(System.in);
         String opcion = sc.nextLine();
@@ -58,7 +59,7 @@ public class Combate {
                     break;
         }
         
-        System.out.println("\nCOMIENZA EL COMBATE!!!\n");
+        System.out.println("\nCOMIENZA EL COMBATE!!!");
         
         // Salud total de los personajes
         int saludEsbDesafiante = recorrerEsbirros(pjDesafiante.getEsbirros(), 0);
@@ -73,12 +74,12 @@ public class Combate {
         this.terminarCombate(data, desafio);
     }
     
-    private void jugarRonda(Personaje p1, Personaje p2, int[] s1, int[] s2, PersonajeUsuario pUsuario1, PersonajeUsuario pUsuario2, Desafio desafio) {
+    private void jugarRonda(Personaje p1, Personaje p2, int[] s1, int[] s2, PersonajeUsuario pUsuario1, PersonajeUsuario pUsuario2, Desafio desafio) throws InterruptedException {
         
         // 0.- Print del inicio del combate
         
-        System.out.println("|------------------------------");
-        System.out.println("\n|Ronda: " + this.ronda);
+        System.out.print("\n|-----------------------------------------------------\n");
+        System.out.print("|Ronda: " + this.ronda + "\n|\n");
         
         
         // 1.- Calcular el potencial de ataque y de defensa de cada personaje
@@ -92,12 +93,12 @@ public class Combate {
         // Se aplican las debilidades y fortalezas
         
         // Al potencial del desafiante
-        setModificadores(potAtaq1, desafio.getDesafiante(), desafio);
-        setModificadores(potDef1, desafio.getDesafiante(), desafio);
+        potAtaq1 = potAtaq1 + setModificadores(desafio.getDesafiante(), desafio);
+        potDef1 = potDef1 + setModificadores(desafio.getDesafiante(), desafio);
         
         // Al potencial del desafiado
-        setModificadores(potAtaq2, desafio.getDesafiado(), desafio);
-        setModificadores(potDef2, desafio.getDesafiado(), desafio);
+        potAtaq2 = potAtaq2 + setModificadores(desafio.getDesafiado(), desafio);
+        potDef2 = potDef2 + setModificadores(desafio.getDesafiado(), desafio);
         
         // 2.- Calcular tantos numeros aleatorios entre 1 y 6
         
@@ -135,8 +136,8 @@ public class Combate {
             }
         }
         
-        System.out.println("|Ataque del desafiante (J1): " + exitosAtaq[0]);
-        System.out.println("|Ataque del desafiado (J2): " + exitosAtaq[1] + "\n");
+        System.out.print("|Ataque del desafiante (J1): " + exitosAtaq[0] + "\n");
+        System.out.print("|Ataque del desafiado (J2): " + exitosAtaq[1] + "\n|\n");
         
         // En la defensa:
         
@@ -158,56 +159,88 @@ public class Combate {
             }
         }
         
-        System.out.println("|Defensa del desafiante (J1): " + exitosDef[0]);
-        System.out.println("|Defensa del desafiado (J2): " + exitosDef[1] + "\n");
+        System.out.print("|Defensa del desafiante (J1): " + exitosDef[0] + "\n");
+        System.out.print("|Defensa del desafiado (J2): " + exitosDef[1] + "\n|\n");
+        
+        System.out.print("|Salud desafiante (J1): " + s1[0] + " Escudo de esbirros: " + s1[1] + "\n");
+        System.out.print("|Salud desafiado (J2): " + s2[0] + " Escudo de esbirros: " + s2[1] + "\n|\n");
         
         // 3.- Reducir en 1 la salud si el ataque supera o iguala a la defensa
         
         if (exitosAtaq[0] >= exitosDef[1]) {
             actualizarSalud(s2, -1);
-            String j2 = pUsuario2.getTipo();
+            String tipoj1 = pUsuario1.getTipo();
+            tipoj1 = tipoj1.toUpperCase();
+            String mensaje = "|El " + tipoj1;
+            
+            if (tipoj1.equals("LICANTROPO")) {
+                mensaje = mensaje + " LE METE UN ZARPAZO al ";
+            } else if (tipoj1.equals("VAMPIRO")) {
+                mensaje = mensaje + " LE HINCA EL DIENTE al ";
+            } else {
+                mensaje = mensaje + " LE METE UN TIRO al ";
+            }
+            
             if (p2 instanceof Licantropo) {
-                System.out.println("|El LICANTROPO del JUGADOR1 LE METE UN ZARPAZO al " + j2 + " del JUGADOR2!! (-1 de salud)");
+                mensaje = mensaje + "LICANTROPO del JUGADOR2!! (-1 de salud)";
                 Licantropo l2 = (Licantropo) p2;
                 l2.setRabia(l2.getRabia()+ 1);
                 if (l2.getRabia()> 3) {
                     l2.setRabia(3);
                 }
-            } else if (p1 instanceof Cazador) {
-                System.out.println("|El CAZADOR del JUGADOR1 LE METE UN TIRO al " + j2 + " del JUGADOR2!! (-1 de salud)");
-                Cazador c2 = (Cazador) p1;
+            } else if (p2 instanceof Cazador) {
+                mensaje = mensaje + "CAZADOR del JUGADOR2!! (-1 de salud)";
+                Cazador c2 = (Cazador) p2;
                 c2.setVoluntad(c2.getVoluntad()- 1);
                 if (c2.getVoluntad()< 0) {
                     c2.setVoluntad(0);
                 }
             } else {
-                System.out.println("|El VAMPIRO del JUGADOR1 LE HINCA EL DIENTE al " + j2 + " del JUGADOR2!! (-1 de salud)");
+                mensaje = mensaje + "VAMPIRO del JUGADOR2!! (-1 de salud)";
             }
+            
+            System.out.println(mensaje);
+            
         }
         else if (exitosAtaq[1] >= exitosDef[0]) {
             actualizarSalud(s1, -1);
-            String j1 = pUsuario1.getTipo();
+            String tipoj2 = pUsuario2.getTipo();
+            tipoj2 = tipoj2.toUpperCase();
+            String mensaje = "|El " + tipoj2;
+            
+            if (tipoj2.equals("LICANTROPO")) {
+                mensaje = mensaje + " LE METE UN ZARPAZO al ";
+            } else if (tipoj2.equals("VAMPIRO")) {
+                mensaje = mensaje + " LE HINCA EL DIENTE al ";
+            } else {
+                mensaje = mensaje + " LE METE UN TIRO al ";
+            }
+            
             if (p1 instanceof Licantropo) {
-                System.out.println("|El LICANTROPO del JUGADOR2 LE METE UN ZARPAZO al " + j1 + " del JUGADOR1!! (-1 de salud)");
+                mensaje = mensaje + "LICANTROPO del JUGADOR1!! (-1 de salud)";
                 Licantropo l1 = (Licantropo) p1;
                 l1.setRabia(l1.getRabia()+ 1);
                 if (l1.getRabia() > 3) {
                     l1.setRabia(3);
                 }
             } else if (p1 instanceof Cazador) {
-                System.out.println("|El CAZADOR del JUGADOR2 LE METE UN TIRO al " + j1 + " del JUGADOR1!! (-1 de salud)");
+                mensaje = mensaje + "CAZADOR del JUGADOR1!! (-1 de salud)";
                 Cazador c1 = (Cazador) p1;
                 c1.setVoluntad(c1.getVoluntad()- 1);
                 if (c1.getVoluntad()< 0) {
                     c1.setVoluntad(0);
                 }
             } else {
-                System.out.println("|El VAMPIRO del JUGADOR2 LE HINCA EL DIENTE al " + j1 + " del JUGADOR1!! (-1 de salud)");
+                mensaje = mensaje + "VAMPIRO del JUGADOR1!! (-1 de salud)";
             }
+            
+            System.out.println(mensaje);
         }        
         
         // Se suma 1 a la ronda
         this.ronda++;
+        
+        TimeUnit.SECONDS.sleep(3);
         
     }
     
@@ -226,15 +259,28 @@ public class Combate {
             esbirroSinDerrotar[1] = 1;
         }
         if (saludDesafiante[0] == 0 && saludDesafiado[0] == 0) {
-            System.out.println("HA HABIDO UN EMPATE");
+            System.out.println("\nHA HABIDO UN EMPATE\n");
+            Cliente c1 = (Cliente) data.getUsuarioByNick(desafio.getDesafiante());
+            PersonajeUsuario pj1 = c1.getPersonaje();
+            pj1.actualizarOro(desafio.getOroApostado());
             log = new Historial(desafio.getDesafiante(), desafio.getDesafiado(), ronda, "EMPATE", esbirroSinDerrotar, desafio.getOroApostado());
         } else if (saludDesafiante[0] == 0) {
-            System.out.println("HA GANADO EL DESAFIADO (P2), FELICIDADES!!");
+            System.out.println("\nHA GANADO EL DESAFIADO (J2), FELICIDADES!!\n");
+            Cliente c2 = (Cliente) data.getUsuarioByNick(desafio.getDesafiado());
+            PersonajeUsuario pj2 = c2.getPersonaje();
+            pj2.actualizarOro(desafio.getOroApostado());
             log = new Historial(desafio.getDesafiante(), desafio.getDesafiado(), ronda, desafio.getDesafiado(), esbirroSinDerrotar, desafio.getOroApostado());
         } else {
-            System.out.println("HA GANADO EL DESAFIANTE (P1), FELICIDADES!!");
+            System.out.println("\nHA GANADO EL DESAFIANTE (J1), FELICIDADES!!\n");
+            Cliente c1 = (Cliente) data.getUsuarioByNick(desafio.getDesafiante());
+            PersonajeUsuario pj1 = c1.getPersonaje();
+            Cliente c2 = (Cliente) data.getUsuarioByNick(desafio.getDesafiado());
+            PersonajeUsuario pj2 = c2.getPersonaje();
+            pj1.actualizarOro(2*desafio.getOroApostado());
+            pj2.actualizarOro(-desafio.getOroApostado());
             log = new Historial(desafio.getDesafiante(), desafio.getDesafiado(), ronda, desafio.getDesafiante(), esbirroSinDerrotar, desafio.getOroApostado());
         }
+        
         ((Cliente) data.getUsuarioByNick(desafio.getDesafiado())).getPersonaje().getHistorial().add(log);
         ((Cliente) data.getUsuarioByNick(desafio.getDesafiante())).getPersonaje().getHistorial().add(log);
         data.eliminarDesafio(desafio);
@@ -250,13 +296,15 @@ public class Combate {
         PersonajeUsuario pj2 = c2.getPersonaje();
         
         long diezmo = (long) (desafio.getOroApostado() * 0.10);
-        pj1.setOro(pj1.getOro() - diezmo);
-        pj2.setOro(pj2.getOro() + diezmo + desafio.getOroApostado());
+        pj1.actualizarOro(-diezmo);
+        pj2.actualizarOro(diezmo);
+        data.eliminarDesafio(desafio);
     }
     
-    private void setModificadores(int potencial, String jugador, Desafio d) {
+    private Integer setModificadores(String jugador, Desafio d) {
         ArrayList<Debilidad> debilidades = new ArrayList<Debilidad>();
         ArrayList<Fortaleza> fortalezas = new ArrayList<Fortaleza>();
+        Integer p = 0;
         
         if (jugador.equals(d.getDesafiante())) {
             debilidades = d.getDebDesafiante();
@@ -268,11 +316,13 @@ public class Combate {
         
         // Se recorren las debilidades y las fortalezas, disminuyendo o aumentando el potencial respectivamente
         for (int i = 0; i < debilidades.size(); i++) {
-            potencial = potencial - debilidades.get(i).getValor();
+            p = p - debilidades.get(i).getValor();
         }
         for (int i = 0; i < fortalezas.size(); i++) {
-            potencial = potencial - fortalezas.get(i).getValor();
+            p = p + fortalezas.get(i).getValor();
         }
+        
+        return p;
     }
     
     private void actualizarSalud(int[] salud, int valor) {

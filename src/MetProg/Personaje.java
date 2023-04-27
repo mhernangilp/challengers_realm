@@ -401,8 +401,8 @@ public class Personaje implements Serializable{
                         }
                         System.out.println("Tipo de esbirro");
                         System.out.println("1.-Humano");
-                        System.out.println("2-Ghoul");
-                        System.out.println("3-Demonio");
+                        System.out.println("2.-Ghoul");
+                        System.out.println("3.-Demonio");
                         tipoesbirro = input.nextInt();
                         switch(tipoesbirro){ 
                             case 1:
@@ -418,7 +418,7 @@ public class Personaje implements Serializable{
                                 humano = new Humano(lealtad, nombre, salud);
 
                                 subesbirros.add(humano); 
-                                System.out.println("Humano añadidio al demonio correctamente");
+                                System.out.println("\n--- Humano añadido al demonio correctamente ---\n");
 
 
                                 break;
@@ -434,16 +434,16 @@ public class Personaje implements Serializable{
 
                                  subesbirros.add(ghoul);
 
-                                 System.out.println("Ghoul añadido al demonio correctamente");
+                                 System.out.println("\n--- Ghoul añadido al demonio correctamente ---\n");
                                  break;
                             case 3: 
                                 System.out.println("Pacto entre demonio y amo");
                                 pacto = input.nextLine();
                                 input.nextLine();
                             do{
-                                 System.out.println("Desea añadir mas esbirros al demonio(1 para añadir esbirros, 0 para no añadir)");
+                                 System.out.println("Desea añadir mas esbirros al demonio (1 para añadir esbirros, 0 para no añadir)");
                                  confirmacion = input.nextInt();
-                                 if (confirmacion==1){
+                                 if (confirmacion == 1){
                                      // en el caso de que añadamos un demonio al demonio se podra añadir 
                                      this.anadirSubesbirros(subesbirros);
 
@@ -498,13 +498,13 @@ public class Personaje implements Serializable{
                         }
                         System.out.println("Tipo de esbirro: (escriba el numero del tipo (1-3)");
                         System.out.println("1.-Humano");
-                        System.out.println("2-Ghoul");
-                        System.out.println("3-Demonio");
+                        System.out.println("2.-Ghoul");
+                        System.out.println("3.-Demonio");
                         tipoesbirro = input.nextInt();
                         switch(tipoesbirro){ 
                             case 1:
                                 if (this instanceof Vampiro){
-                                    System.out.println("Los vampiros no pueden tener esbirros humanos");
+                                    System.out.println("\n--- Los vampiros no pueden tener esbirros humanos ---\n");
                                     break;
                                 }
                                 else{
@@ -533,7 +533,7 @@ public class Personaje implements Serializable{
                                 }
                                  ghoul = new Ghoul(dependencia, nombre, salud);
                                  esbirros.add(ghoul);
-                                 System.out.println("Ghoul añadido correctamente");
+                                 System.out.println("\n--- Ghoul añadido correctamente ---\n");
                                 
                              
                                  break;
@@ -545,9 +545,9 @@ public class Personaje implements Serializable{
                              
                         do{     // el siguiente bucle se repetirá hasta que el usuario pulse 0
                                 // esto hará que se añadan tantos esbirros al demonio como el usuario quiera
-                                 System.out.println("Desea añadir mas esbirros al demonio(1 para añadir esbirros, 0 para no añadir)");
+                                 System.out.println("Desea añadir mas esbirros al demonio (1 para añadir esbirros, 0 para no añadir)");
                                  confirmacion = input.nextInt();
-                                 if (confirmacion==1){
+                                 if (confirmacion == 1){
                                      this.anadirSubesbirros(subesbirros);
                         
                            }else if(confirmacion ==0){
@@ -564,16 +564,15 @@ public class Personaje implements Serializable{
                              }while (confirmacion != 0);
                             
                       
-                        System.out.println("Demonio añadidio correctamente");
+                        System.out.println("\n--- Demonio añadidio correctamente ---\n");
                         }    break;       
               
                 case 2:
                         System.out.println("Escriba el numero del esbirro que quiera eliminar");
                            for (int i= 0; i< esbirros.size(); i++){
                            System.out.println("-- --");
-                           System.out.println(i+"--Nombre:"+esbirros.get(i).getNombre());
-                           System.out.println("Salud:"+esbirros.get(i).getSalud());
-                          
+                           System.out.println(i+"--Nombre: "+esbirros.get(i).getNombre());
+                           System.out.println("Salud: "+esbirros.get(i).getSalud());
                            }
                            int indice = input.nextInt();
 

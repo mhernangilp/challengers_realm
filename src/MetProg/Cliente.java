@@ -155,9 +155,9 @@ public class Cliente extends Usuario{
             }
             opcion = input.nextLine();
             if (armas.containsKey(opcion)){
-                peso += armas.get(opcion).getPeso();
+                peso = peso + armas.get(opcion).getPeso();
                 armaActiva[i] = opcion;
-                i += 1;
+                i++;
             } else {
                 System.out.println("Por favor escriba un nombre de arma correcto\n");
             }
@@ -247,7 +247,7 @@ public class Cliente extends Usuario{
             System.out.println("\n--- Este usuario es un operador, no se le puede desafiar ---\n");
             return ;
         }
-        if (((Cliente) data.getUsuarioByNick(nick)).getPersonaje().getTipo() == null){
+        if (((Cliente) data.getUsuarioByNick(nick)).getPersonaje() == null){
             System.out.println("\n--- El usuario seleccionado no tiene ningun personaje registrado ---\n");
             return ;
         }
@@ -286,6 +286,7 @@ public class Cliente extends Usuario{
         }
         desafio = new Desafio(this.getNombre(), data.getPersonaje(tipoDesafiante).getDebilidades(), data.getPersonaje(tipoDesafiante).getFortalezas(), nick, data.getPersonaje(tipoDesafiado).getDebilidades(), data.getPersonaje(tipoDesafiante).getFortalezas(), oroApostado);
         data.getDesafios().add(desafio);
+        this.personaje.actualizarOro(-desafio.getOroApostado());
         System.out.println("\n--- Desafio añadido correctamente ---\n");
     }
     

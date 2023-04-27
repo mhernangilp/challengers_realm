@@ -57,5 +57,9 @@ public class PersonajeUsuario implements Serializable{
         this.armaduraActiva = armaduraActiva;
     }
     
+    public void actualizarOro(long valor) {
+        this.oro += valor;
+    }
+    
     
 }
