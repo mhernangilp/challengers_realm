@@ -34,7 +34,7 @@ public class Combate {
         Cliente c2 = (Cliente) data.getUsuarioByNick(desafio.getDesafiado());
         
         // Inicializacion ronda y personajes
-        ronda = 1;
+        this.ronda = 1;
         pjDesafiante = (Personaje) data.pedirPersonaje((c1).getPersonaje().getTipo());
         pjDesafiado = (Personaje) data.pedirPersonaje((c2).getPersonaje().getTipo());
         
@@ -58,7 +58,7 @@ public class Combate {
                     break;
         }
         
-        System.out.println("\n Comenzando el combate... \n");
+        System.out.println("\nCOMIENZA EL COMBATE!!!\n");
         
         // Salud total de los personajes
         int saludEsbDesafiante = recorrerEsbirros(pjDesafiante.getEsbirros(), 0);
@@ -68,12 +68,18 @@ public class Combate {
         saludDesafiado = new int[] {pjDesafiado.getSalud(),saludEsbDesafiado};
         
         while (saludDesafiante[0] > 0 && saludDesafiado[0] > 0) {
-            jugarRonda(pjDesafiante, pjDesafiado, saludDesafiante, saludDesafiado, pUs1, pUs2, ronda, desafio);
+            jugarRonda(pjDesafiante, pjDesafiado, saludDesafiante, saludDesafiado, pUs1, pUs2, desafio);
         }
         this.terminarCombate(data, desafio);
     }
     
-    private void jugarRonda(Personaje p1, Personaje p2, int[] s1, int[] s2, PersonajeUsuario pUsuario1, PersonajeUsuario pUsuario2, Integer ronda, Desafio desafio) {
+    private void jugarRonda(Personaje p1, Personaje p2, int[] s1, int[] s2, PersonajeUsuario pUsuario1, PersonajeUsuario pUsuario2, Desafio desafio) {
+        
+        // 0.- Print del inicio del combate
+        
+        System.out.println("|------------------------------");
+        System.out.println("\n|Ronda: " + this.ronda);
+        
         
         // 1.- Calcular el potencial de ataque y de defensa de cada personaje
         
@@ -92,9 +98,6 @@ public class Combate {
         // Al potencial del desafiado
         setModificadores(potAtaq2, desafio.getDesafiado(), desafio);
         setModificadores(potDef2, desafio.getDesafiado(), desafio);
-        
-        // Se suma 1 a la ronda
-        ronda += 1;
         
         // 2.- Calcular tantos numeros aleatorios entre 1 y 6
         
@@ -132,6 +135,9 @@ public class Combate {
             }
         }
         
+        System.out.println("|Ataque del desafiante (J1): " + exitosAtaq[0]);
+        System.out.println("|Ataque del desafiado (J2): " + exitosAtaq[1] + "\n");
+        
         // En la defensa:
         
         int[] exitosDef = new int[] {0, 0};    // posicion 0 = desafiante, posicion 1 = desafiado
@@ -152,40 +158,57 @@ public class Combate {
             }
         }
         
+        System.out.println("|Defensa del desafiante (J1): " + exitosDef[0]);
+        System.out.println("|Defensa del desafiado (J2): " + exitosDef[1] + "\n");
+        
         // 3.- Reducir en 1 la salud si el ataque supera o iguala a la defensa
         
         if (exitosAtaq[0] >= exitosDef[1]) {
             actualizarSalud(s2, -1);
+            String j2 = pUsuario2.getTipo();
             if (p2 instanceof Licantropo) {
+                System.out.println("|El LICANTROPO del JUGADOR1 LE METE UN ZARPAZO al " + j2 + " del JUGADOR2!! (-1 de salud)");
                 Licantropo l2 = (Licantropo) p2;
                 l2.setRabia(l2.getRabia()+ 1);
                 if (l2.getRabia()> 3) {
                     l2.setRabia(3);
                 }
             } else if (p1 instanceof Cazador) {
+                System.out.println("|El CAZADOR del JUGADOR1 LE METE UN TIRO al " + j2 + " del JUGADOR2!! (-1 de salud)");
                 Cazador c2 = (Cazador) p1;
                 c2.setVoluntad(c2.getVoluntad()- 1);
                 if (c2.getVoluntad()< 0) {
                     c2.setVoluntad(0);
                 }
+            } else {
+                System.out.println("|El VAMPIRO del JUGADOR1 LE HINCA EL DIENTE al " + j2 + " del JUGADOR2!! (-1 de salud)");
             }
         }
         else if (exitosAtaq[1] >= exitosDef[0]) {
             actualizarSalud(s1, -1);
+            String j1 = pUsuario1.getTipo();
             if (p1 instanceof Licantropo) {
+                System.out.println("|El LICANTROPO del JUGADOR2 LE METE UN ZARPAZO al " + j1 + " del JUGADOR1!! (-1 de salud)");
                 Licantropo l1 = (Licantropo) p1;
                 l1.setRabia(l1.getRabia()+ 1);
                 if (l1.getRabia() > 3) {
                     l1.setRabia(3);
                 }
             } else if (p1 instanceof Cazador) {
+                System.out.println("|El CAZADOR del JUGADOR2 LE METE UN TIRO al " + j1 + " del JUGADOR1!! (-1 de salud)");
                 Cazador c1 = (Cazador) p1;
                 c1.setVoluntad(c1.getVoluntad()- 1);
                 if (c1.getVoluntad()< 0) {
                     c1.setVoluntad(0);
                 }
+            } else {
+                System.out.println("|El VAMPIRO del JUGADOR2 LE HINCA EL DIENTE al " + j1 + " del JUGADOR1!! (-1 de salud)");
             }
         }        
+        
+        // Se suma 1 a la ronda
+        this.ronda++;
+        
     }
     
     private void terminarCombate(Database data, Desafio desafio) {
@@ -203,13 +226,13 @@ public class Combate {
             esbirroSinDerrotar[1] = 1;
         }
         if (saludDesafiante[0] == 0 && saludDesafiado[0] == 0) {
-            System.out.println("EMPATE");
+            System.out.println("HA HABIDO UN EMPATE");
             log = new Historial(desafio.getDesafiante(), desafio.getDesafiado(), ronda, "EMPATE", esbirroSinDerrotar, desafio.getOroApostado());
         } else if (saludDesafiante[0] == 0) {
-            System.out.println("HA GANADO EL DESAFIADO (P2)");
+            System.out.println("HA GANADO EL DESAFIADO (P2), FELICIDADES!!");
             log = new Historial(desafio.getDesafiante(), desafio.getDesafiado(), ronda, desafio.getDesafiado(), esbirroSinDerrotar, desafio.getOroApostado());
         } else {
-            System.out.println("HA GANADO EL DESAFIANTE (P1)");
+            System.out.println("HA GANADO EL DESAFIANTE (P1), FELICIDADES!!");
             log = new Historial(desafio.getDesafiante(), desafio.getDesafiado(), ronda, desafio.getDesafiante(), esbirroSinDerrotar, desafio.getOroApostado());
         }
         ((Cliente) data.getUsuarioByNick(desafio.getDesafiado())).getPersonaje().getHistorial().add(log);
