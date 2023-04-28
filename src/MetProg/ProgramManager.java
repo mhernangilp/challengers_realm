@@ -37,6 +37,7 @@ public class ProgramManager {
             }
             catch (Exception e){
                 System.out.println("\n--- Por favor introduzca un valor valido ---\n");
+                opcion = 0;
             }
             switch (opcion){
             case 1: sistema.logIn(data);
