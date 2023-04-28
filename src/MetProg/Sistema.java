@@ -1,6 +1,7 @@
 
 package MetProg;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -74,6 +75,33 @@ public class Sistema {
                                          break;
                             }
                             } while (opcion != 1 && opcion != 2);
+                        }
+                        ArrayList<Historial> logs = ((Cliente) usuario).getPersonaje().getHistorial();
+                        for(int i = 0; i < logs.size(); i++){
+                            if (!logs.get(i).isVisto() && logs.get(i).getUsuarioDesafiante().equals(((Cliente) usuario).getNick())){
+                                System.out.println("\n..::Nuevo resultado de desafio !!::..\n");
+                                System.out.println(i + ":");
+                                System.out.println("    Usuario desafiante: " + logs.get(i).getUsuarioDesafiante());
+                                System.out.println("    Usuario desafiado: " + logs.get(i).getUsuarioDesafiado());
+                                System.out.println("    Rondas Empleadas: " + logs.get(i).getRondasEmpleadas());
+                                SimpleDateFormat ft = new SimpleDateFormat ("dd/MM/yyyy");
+                                System.out.println("    Fecha Combate: " + ft.format(logs.get(i).getFechaCombate()));
+                                System.out.println("    Usuario Vencedor: " + logs.get(i).getUsuarioVencedor());
+                                System.out.print("    El desafiante termino con algun esbirro sin derrotar: ");
+                                if (logs.get(i).getEsbirroSinDerrotar()[0] == 1){
+                                    System.out.println("Si");
+                                } else {
+                                    System.out.println("No");
+                                }
+                                System.out.print("    El desafiado termino con algun esbirro sin derrotar: ");
+                                if (logs.get(i).getEsbirroSinDerrotar()[1] == 1){
+                                    System.out.println("Si");
+                                } else {
+                                    System.out.println("No");
+                                }
+                                System.out.println("    Oro ganado: " + logs.get(i).getOroGanado() + "\n");
+                                logs.get(i).ver();
+                            }
                         }
                         System.out.println("Elija una opcion:");
                         System.out.println("1.- Cerrar sesion");

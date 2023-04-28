@@ -1,6 +1,7 @@
 
 package MetProg;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -225,17 +226,43 @@ public class Operador extends Usuario{
         } while (opcion != 8);
     }
     
+    private boolean incumplidoNormas(Cliente usuario){
+        ArrayList<Historial> logs = usuario.getPersonaje().getHistorial();
+        
+        if (logs.size() > 1){
+            for (int i = 0; i < logs.size() - 1; i++){
+                SimpleDateFormat ft = new SimpleDateFormat ("dd/MM/yyyy");
+                if (ft.format(logs.get(i).getFechaCombate()).equals(ft.format(logs.get(i + 1).getFechaCombate()))){
+                    if (logs.get(i).getUsuarioDesafiante().equals(logs.get(i + 1).getUsuarioDesafiante())){
+                        if (usuario.getNick().equals(logs.get(i).getUsuarioDesafiante())){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }    
+    
     public void banear (Database data) {
         Scanner input = new Scanner (System.in);
-        Integer opcion;
+        Integer opcion, size;
         
+        size = 0;
         ArrayList<Usuario> listaData = data.getUsuarios();
         for (int i = 0; i < listaData.size(); i++) {
             if (listaData.get(i) instanceof Cliente) {
                 if (((Cliente) listaData.get(i)).getPersonaje() != null) {
-                    System.out.println(i + ": " + ((Cliente) listaData.get(i)).getNick());
+                    if (this.incumplidoNormas((Cliente) listaData.get(i))){
+                        System.out.println(i + ": " + ((Cliente) listaData.get(i)).getNick());
+                        size++;
+                    }
                 } 
             }
+        }
+        if (size == 0){
+            System.out.println("\n--- Ningun usuario que se pueda banear ---\n");
+            return ;
         }
         opcion = input.nextInt();
         if (((Cliente) listaData.get(opcion)).isBaneado()){

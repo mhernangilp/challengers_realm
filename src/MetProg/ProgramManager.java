@@ -31,7 +31,7 @@ public class ProgramManager {
             System.out.println("2.- Registrarse");
             System.out.println("3.- Darse de baja");
             System.out.println("4.- Salir del sistema");
-            opcion = input.nextInt();
+            opcion = Integer.parseInt(input.nextLine());
             switch (opcion){
             case 1: sistema.logIn(data);
                     break;

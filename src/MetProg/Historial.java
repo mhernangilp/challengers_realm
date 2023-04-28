@@ -14,6 +14,7 @@ public class Historial implements Serializable{
     private String usuarioVencedor;
     private int[] esbirroSinDerrotar;
     private long oroGanado;
+    private boolean visto;
 
     public Historial(String usuarioDesafiante, String usuarioDesafiado, Integer rondasEmpleadas, String usuarioVencedor, int[] esbirroSinDerrotar, long oroGanado) {
         this.usuarioDesafiante = usuarioDesafiante;
@@ -25,6 +26,7 @@ public class Historial implements Serializable{
         ZoneId timeZone = ZoneId.systemDefault();
         LocalDate date = LocalDate.now();
         this.fechaCombate = Date.from(date.atStartOfDay(timeZone).toInstant());
+        this.visto = false;
     }
 
     public String getUsuarioDesafiante() {
@@ -53,5 +55,13 @@ public class Historial implements Serializable{
 
     public long getOroGanado() {
         return oroGanado;
+    }
+
+    public boolean isVisto() {
+        return visto;
+    }
+    
+    public void ver(){
+        this.visto = true;
     }
 }
