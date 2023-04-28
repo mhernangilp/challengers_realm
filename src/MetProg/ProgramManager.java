@@ -32,13 +32,7 @@ public class ProgramManager {
             System.out.println("2.- Registrarse");
             System.out.println("3.- Darse de baja");
             System.out.println("4.- Salir del sistema");
-            try {
-                opcion = Integer.parseInt(input.nextLine());
-            }
-            catch (Exception e){
-                System.out.println("\n--- Por favor introduzca un valor valido ---\n");
-                opcion = 0;
-            }
+            opcion = input.nextInt();
             switch (opcion){
             case 1: sistema.logIn(data);
                     break;
