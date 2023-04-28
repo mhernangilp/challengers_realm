@@ -13,6 +13,7 @@ public class Combate {
     private int[] saludDesafiado;
     private Integer ronda;
     
+    // Esta funcion se encargara de recorrer los esbirros de forma recursiva e ir sumando la salud de cada uno
     private int recorrerEsbirros(ArrayList<Esbirro> e, int salud) {
         for (int i = 0; i < e.size(); i++) {
             Esbirro esbirro = e.get(i);
@@ -46,6 +47,7 @@ public class Combate {
         System.out.println("Desafio aceptado >:)");
         System.out.println("\nDesea cambiar sus armas o armaduras? (si/no)");
         
+        // Aquí se activará la función correspondiente para cambiar las armas del desafiado, si así lo desea
         Scanner sc = new Scanner(System.in);
         String opcion = sc.nextLine();
         opcion = opcion.toUpperCase();
@@ -65,6 +67,7 @@ public class Combate {
         int saludEsbDesafiante = recorrerEsbirros(pjDesafiante.getEsbirros(), 0);
         int saludEsbDesafiado = recorrerEsbirros(pjDesafiado.getEsbirros(), 0);
         
+        // La salud de los jugadores será un array, en la primera posición la salud propia del personaje y la segunda los esbirros
         saludDesafiante = new int[] {pjDesafiante.getSalud(), saludEsbDesafiante};
         saludDesafiado = new int[] {pjDesafiado.getSalud(),saludEsbDesafiado};
         
@@ -159,6 +162,7 @@ public class Combate {
             }
         }
         
+        // Decoración para el printeo de las rondas
         System.out.print("|Defensa del desafiante (J1): " + exitosDef[0] + "\n");
         System.out.print("|Defensa del desafiado (J2): " + exitosDef[1] + "\n|\n");
         
@@ -167,10 +171,12 @@ public class Combate {
         
         // 3.- Reducir en 1 la salud si el ataque supera o iguala a la defensa
         
+        // Si el ataque del desafiante supera a la defensa del desafiado:
         if (exitosAtaq[0] >= exitosDef[1]) {
             actualizarSalud(s2, -1);
             String tipoj1 = pUsuario1.getTipo();
             tipoj1 = tipoj1.toUpperCase();
+            // Mensaje para decorar las rondas
             String mensaje = "|El " + tipoj1;
             
             if (tipoj1.equals("LICANTROPO")) {
@@ -202,6 +208,7 @@ public class Combate {
             System.out.println(mensaje);
             
         }
+        // Si sucede lo contrario:
         else if (exitosAtaq[1] >= exitosDef[0]) {
             actualizarSalud(s1, -1);
             String tipoj2 = pUsuario2.getTipo();
@@ -240,7 +247,7 @@ public class Combate {
         // Se suma 1 a la ronda
         this.ronda++;
         
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(2);
         
     }
     
@@ -258,19 +265,24 @@ public class Combate {
         } else{
             esbirroSinDerrotar[1] = 1;
         }
+        // Si hay empate:
         if (saludDesafiante[0] == 0 && saludDesafiado[0] == 0) {
             System.out.println("\nHA HABIDO UN EMPATE\n");
             Cliente c1 = (Cliente) data.getUsuarioByNick(desafio.getDesafiante());
             PersonajeUsuario pj1 = c1.getPersonaje();
             pj1.actualizarOro(desafio.getOroApostado());
             log = new Historial(desafio.getDesafiante(), desafio.getDesafiado(), ronda, "EMPATE", esbirroSinDerrotar, desafio.getOroApostado());
-        } else if (saludDesafiante[0] == 0) {
+        } 
+        // Si gana el desafiado
+        else if (saludDesafiante[0] == 0) {
             System.out.println("\nHA GANADO EL DESAFIADO (J2), FELICIDADES!!\n");
             Cliente c2 = (Cliente) data.getUsuarioByNick(desafio.getDesafiado());
             PersonajeUsuario pj2 = c2.getPersonaje();
             pj2.actualizarOro(desafio.getOroApostado());
             log = new Historial(desafio.getDesafiante(), desafio.getDesafiado(), ronda, desafio.getDesafiado(), esbirroSinDerrotar, desafio.getOroApostado());
-        } else {
+        } 
+        // Si gana el desafiante:
+        else {
             System.out.println("\nHA GANADO EL DESAFIANTE (J1), FELICIDADES!!\n");
             Cliente c1 = (Cliente) data.getUsuarioByNick(desafio.getDesafiante());
             PersonajeUsuario pj1 = c1.getPersonaje();
@@ -286,6 +298,7 @@ public class Combate {
         data.eliminarDesafio(desafio);
     }
     
+    // Esta funcion se encargará del rechazo del combate, quitando el diezmo de lo que se apostó al desafiado, y sumándoselo al desafiante
     public void rechazarCombate(Database data, Desafio desafio){
         System.out.println("Desafio rechazado :(");
         
@@ -301,11 +314,13 @@ public class Combate {
         data.eliminarDesafio(desafio);
     }
     
+    // Esta función se encargará de aplicar las debilidades o fortalezas de los personajes
     private Integer setModificadores(String jugador, Desafio d) {
         ArrayList<Debilidad> debilidades = new ArrayList<Debilidad>();
         ArrayList<Fortaleza> fortalezas = new ArrayList<Fortaleza>();
         Integer p = 0;
         
+        // Se cargarán las debilidades o fortalezas dependiendo del jugador
         if (jugador.equals(d.getDesafiante())) {
             debilidades = d.getDebDesafiante();
             fortalezas = d.getFortDesafiante();
@@ -325,6 +340,7 @@ public class Combate {
         return p;
     }
     
+    // Esta función se encargará de actualizar la salud sumando el valor del parámetro
     private void actualizarSalud(int[] salud, int valor) {
         if (salud[1] != 0) {
                 salud[1] = salud[1] + valor;
@@ -338,17 +354,20 @@ public class Combate {
     
     private int calcularPotAtaque(Personaje p, PersonajeUsuario pUsuario) {
         
+        // Se cargan las armas activas
         String[] armasActivas = pUsuario.getArmaActiva();
         int ataqEquipo = 0;
             
         if (armasActivas != null) {
             for (String armaActiva : armasActivas) {
                 if (armaActiva != null) {
+                    // Se suma los modificadores de ataque de cada arma
                     ataqEquipo = ataqEquipo + p.getArmas().get(armaActiva).getModifAtaque();
                 }
             }
         }
         
+        // Lo mismo con la armadura
         Armadura armaduraActiva = p.getArmaduras().get(pUsuario.getArmaduraActiva());
         
         if (armaduraActiva != null) {
@@ -366,6 +385,7 @@ public class Combate {
             
             Disciplina d = (Disciplina) v.getHabilidad();
             
+            // Si se puede pagar la habilidad, lo hace y consigue el ataque de la habilidad
             if (v.getPuntosSangre() >= d.getCosteSangre()) {
                 potencial = potencial + d.getAtaque();
                 v.setPuntosSangre(v.getPuntosSangre() - d.getCosteSangre());
@@ -378,6 +398,7 @@ public class Combate {
             
             Don d = (Don) l.getHabilidad();
             
+            // Con el Licántropo igual, pero no se restará la rabia
             if (l.getRabia() >= d.getCosteRabia()) {
                 potencial = potencial + d.getAtaque();
             }
@@ -397,6 +418,7 @@ public class Combate {
     
     private int calcularPotDefensa(Personaje p, PersonajeUsuario pUsuario) {
     
+        // Lo mismo para la defensa, pero sumando el valor de las modificaciones de la defensa de cada arma o armadura
         String[] armasActivas = pUsuario.getArmaActiva();
         int defEquipo = 0;
             
