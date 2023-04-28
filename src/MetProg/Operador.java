@@ -256,7 +256,11 @@ public class Operador extends Usuario{
         return false;
     }    
     
-    // Esta función se encargará de banear de la base de datos al usuario que el Operador considere.
+    // El método busca en la lista de usuarios a aquellos que son clientes con personaje y que han incumplido alguna norma. Si no encuentra ningún usuario que
+    // cumpla ambas características (tener personaje e incumplir normas), mostrará por pantalla que ningún usuario se puede banear. Por el contrario, muestra la 
+    // lista de usuarios baneables por pantalla con un indice por cada uno. Introduciendo ese indice "i", comprobará si el usuario seleccionado ya ha sido 
+    // baneado usando el método "isBaneado()". Si ya ha sido baneado se indicará mostrándolo por pantalla. Si no ha sido baneado, se baneará al usuario seleccionado
+    // haciendo uso del método "banear()"
     public void banear (Database data) {
         Scanner input = new Scanner (System.in);
         Integer opcion, size;
@@ -288,8 +292,9 @@ public class Operador extends Usuario{
         }  
     }
     
-    // Esta función se encargará de desbanear de la base de datos el usuario que el Operador considere,
-    // de forma parecida a la función anterior
+    // El método busca en la lista de usuarios y muestra por pantalla a aquellos que son clientes y que han sido baneados. El usuario ingresará por pantalla
+    // un input de opción para seleccionar el usuario a desbanear. Primero comprueba si el usuario está baneado. Si no lo está, mostrará por pantalla "Usuario
+    // no baneado". Por el contrario, si está baneado, lo desbaneará usando el método "desbanear()" y confirmará el desbaneo con un mensaje por pantalla.
     public void desbanear (Database data) {
         Scanner input = new Scanner (System.in);
         Integer opcion;
