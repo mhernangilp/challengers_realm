@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Scanner;
 
+// La clase se encargará de mostrar el menú principal, con todas las opciones que un usuario puede realizar
 public class ProgramManager {
     public void pantallaInicial() throws Exception{
         Database data;
@@ -53,6 +54,7 @@ public class ProgramManager {
         }
     }
     
+    // Esta función se encargará de cargar los datos del archivo binario
     private Database loadData() throws FileNotFoundException, IOException, ClassNotFoundException{
         ObjectInputStream in = new ObjectInputStream(new FileInputStream("data/database.data"));
         Database data = (Database) in.readObject();

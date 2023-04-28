@@ -15,7 +15,7 @@ public class Historial implements Serializable{
     private int[] esbirroSinDerrotar;
     private long oroGanado;
     private boolean visto;
-
+    
     public Historial(String usuarioDesafiante, String usuarioDesafiado, Integer rondasEmpleadas, String usuarioVencedor, int[] esbirroSinDerrotar, long oroGanado) {
         this.usuarioDesafiante = usuarioDesafiante;
         this.usuarioDesafiado = usuarioDesafiado;

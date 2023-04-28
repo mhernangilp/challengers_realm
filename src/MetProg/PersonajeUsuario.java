@@ -12,6 +12,8 @@ public class PersonajeUsuario implements Serializable{
     private long oro;
     private ArrayList<Historial> historial;
 
+    // Personaje usuario implementará Serializable para guardar sus datos en un fichero,
+    // guardando el tipo del personaje, su nombre, las armas y armadura activa, el oro y el historial del mismo
     public PersonajeUsuario(String tipo, String nombre) {
         this.tipo = tipo;
         this.nombre = nombre;
@@ -21,6 +23,7 @@ public class PersonajeUsuario implements Serializable{
         this.oro = 1000;
     }
 
+    // Getters y Setters
     public void setOro(long oro) {
         this.oro = oro;
     }

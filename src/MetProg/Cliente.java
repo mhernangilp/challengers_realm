@@ -21,8 +21,7 @@ public class Cliente extends Usuario{
     public String getNumReg() {
         return numReg;
     }
-    
-    // Método que devuelve el valor booleano del estado de la variable baneado, es decir, devuelve True si está baneado y False si no lo está
+
     public boolean isBaneado() {
         return baneado;
     }
@@ -31,18 +30,14 @@ public class Cliente extends Usuario{
         return personaje;
     }
     
-    // Establece la variable baneado a True, por lo que se baneará al cliente al aplicarle este método
     public void banear(){
         this.baneado = true;
     }
     
-    // Establece la variable baneado a False, por lo que se desbaneará al cliente al aplicarle este método
     public void desbanear(){
         this.baneado = false;
     }
     
-    // Crea el array temporal Ranking, que se compone únicamente de clientes con al menos un personaje. Si está vacío imprimirá por pantalla una frase
-    // que así lo indique, y si contiene elementos se mostrará ordenadamente por cada elemento su posición, su nick y su cantidad de oro
     public void rankingGlobal(Database data) {
         ArrayList<Usuario> ArrayRanking = new ArrayList<Usuario>();
         ArrayList<Usuario> listaData = data.getUsuarios();

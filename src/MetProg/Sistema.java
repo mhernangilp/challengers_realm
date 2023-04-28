@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+// La clase se encargará de el resto de menús de la aplicación
 public class Sistema {
     public void logIn(Database data) throws Exception{
         Scanner input = new Scanner(System.in);
@@ -13,6 +14,7 @@ public class Sistema {
         String contraseña;
         Integer opcion;
         
+        // Primero, el inicio de sesión:
         System.out.println("Escriba su nick:");
         nick = input.nextLine();
         System.out.println("Escriba su contraseña:");
@@ -30,6 +32,7 @@ public class Sistema {
                         System.out.println("\n--- Usuario baneado ---\n");
                         return ;
                     }
+                    // Las opciones de registrar personaje o consultar ranking global 
                     if (((Cliente)usuario).getPersonaje() == null){
                         System.out.println("Elija una opcion:");
                         System.out.println("1.- Cerrar sesion");
@@ -53,6 +56,7 @@ public class Sistema {
                             Combate combate = new Combate();
                             Desafio desafio = data.getDesafios().get(data.getPosDesafio(usuario.getNick()));
                             do {
+                            // Si hay desafíos pendientes, mostrará la notificación al comienzo del inicio de sesión:
                             System.out.println("¡¡ Tienes un desafio nuevo!!");
                             System.out.println("-- Desafiante: " + desafio.getDesafiante());
                             System.out.println("-- Personaje del enemigo: " + ((Cliente) data.getUsuarioByNick(desafio.getDesafiante())).getPersonaje().getTipo());
@@ -76,6 +80,7 @@ public class Sistema {
                             }
                             } while (opcion != 1 && opcion != 2);
                         }
+                        // Y mostrará los resultados del historial al desafiante
                         ArrayList<Historial> logs = ((Cliente) usuario).getPersonaje().getHistorial();
                         for(int i = 0; i < logs.size(); i++){
                             if (!logs.get(i).isVisto() && logs.get(i).getUsuarioDesafiante().equals(((Cliente) usuario).getNick())){
@@ -103,6 +108,7 @@ public class Sistema {
                                 logs.get(i).ver();
                             }
                         }
+                        // De nuevo el menú:
                         System.out.println("Elija una opcion:");
                         System.out.println("1.- Cerrar sesion");
                         System.out.println("2.- Elegir equipo activo");
@@ -141,6 +147,7 @@ public class Sistema {
                         System.out.println("4.- Banear usuarios");
                         System.out.println("5.- Desbanear usuarios");
                         opcion = input.nextInt();
+                        // Segun la opcion, se llamará a las funciones respectivas
                         switch (opcion){
                             case 1: break;
                             
@@ -164,6 +171,7 @@ public class Sistema {
         }
     }
     
+    // Esta función se encargará del registro de un usuario en la base de datos
     public void registro(Database data){
         Scanner input = new Scanner(System.in);
         Integer opcion;
@@ -208,6 +216,7 @@ public class Sistema {
         System.out.println("\n--- Usuario registrado correctamente ---\n");
     }
     
+    // Esta función se encargará de crear un numero de registro unico por cada usuario
     private String crearNumReg(Database data){
         Random r = new Random();
         String numReg;
@@ -221,6 +230,7 @@ public class Sistema {
         return (numReg);
     }
     
+    // Función para dar de baja una cuenta en la base de datos
     public void darDeBaja(Database data){
         Scanner input = new Scanner(System.in);
         String nick;

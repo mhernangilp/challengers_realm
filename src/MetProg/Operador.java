@@ -7,10 +7,13 @@ import java.util.Scanner;
 
 public class Operador extends Usuario{
     
+    // Operador heredará de Usuario
     public Operador(String nombre, String nick, String contraseña) {
         super(nombre, nick, contraseña);
     }
     
+    // Un operador podrá validar desafíos, y seguidamente, al escoger el desafío, añadirá las debilidades y fortalezas
+    // que desee que estén presentes en el mismo.
     public void validarDesafios(Database data){
         Scanner input = new Scanner(System.in);
         Integer opcion, opcion2;
@@ -20,10 +23,13 @@ public class Operador extends Usuario{
         ArrayList<Debilidad> debilidadesDesafiado = new ArrayList<Debilidad>();
         ArrayList<Fortaleza> fortalezasDesafiado = new ArrayList<Fortaleza>();
         
+        // Para ello, usará la lista de desafíos de database
         if (desafios.size() == 0){
             System.out.println("\n--- No hay desafios para validar en estos momentos ---\n");
             return ;
         }
+        
+        // Se mostrará la información respectiva del desafío
         System.out.println("Selecione un desafio:");
         for (int i = 0; i < desafios.size(); i++){
             if (!desafios.get(i).isValidado()){
@@ -34,12 +40,14 @@ public class Operador extends Usuario{
             }
         }
         opcion = input.nextInt();
+        // Captura del error por si opcion no entra en el rango correcto
         if (opcion < 0 || opcion > desafios.size() - 1){
             System.out.println("\n--- Opcion incorrecta ---\n");
             return ;
         }
         Desafio desafio = desafios.get(opcion);
         do {
+            // Seleccion de las debilidades y fortalezas:
             ArrayList<Debilidad> debilidades = desafio.getDebDesafiante();
             System.out.println("Seleccione las debilidades de el desafiante '" + desafio.getDesafiante() + "' quedeben estar presentes en este combate: (-1 para continuar)");
             System.out.println("Tipo de personaje del contrincante: " + ((Cliente) data.getUsuarioByNick(desafio.getDesafiado())).getPersonaje().getTipo());
@@ -155,6 +163,7 @@ public class Operador extends Usuario{
                 fortalezasDesafiado.add(fortalezas.get(opcion2));
             }
         } while (opcion2 != -1);
+        // Finalmente, se guardan las debilidades y fortalezas en el desafío
         desafio.setDebDesafiante(debilidadesDesafiante);
         desafio.setFortDesafiante(fortalezasDesafiante);
         desafio.setDebDesafiado(debilidadesDesafiado);
@@ -163,6 +172,8 @@ public class Operador extends Usuario{
         System.out.println("\n--- Desafio validado correctamente ---\n");
     }
     
+    // Esta función permitirá editar un personaje, eligiendo primero el tipo.
+    // Una vez escogido, podrá modificar todos los aspectos del mismo (armas, armaduras, habilidades, etc.)
     public void editarPersonaje(Database data){
         Scanner input = new Scanner(System.in);
         Integer opcion;
@@ -226,6 +237,7 @@ public class Operador extends Usuario{
         } while (opcion != 8);
     }
     
+    // Esta función verificará si un usuario ha incumplido las normas, es decir, si se ha desafiado a un usuario que ha perdido un combate en las últimas 24 horas
     private boolean incumplidoNormas(Cliente usuario){
         ArrayList<Historial> logs = usuario.getPersonaje().getHistorial();
         
@@ -244,16 +256,14 @@ public class Operador extends Usuario{
         return false;
     }    
     
-    // El método busca en la lista de usuarios a aquellos que son clientes con personaje y que han incumplido alguna norma. Si no encuentra ningún usuario que
-    // cumpla ambas características (tener personaje e incumplir normas), mostrará por pantalla que ningún usuario se puede banear. Por el contrario, muestra la 
-    // lista de usuarios baneables por pantalla con un indice por cada uno. Introduciendo ese indice "i", comprobará si el usuario seleccionado ya ha sido 
-    // baneado usando el método "isBaneado()". Si ya ha sido baneado se indicará mostrándolo por pantalla. Si no ha sido baneado, se baneará al usuario seleccionado
-    // haciendo uso del método "banear()"
+    // Esta función se encargará de banear de la base de datos al usuario que el Operador considere.
     public void banear (Database data) {
         Scanner input = new Scanner (System.in);
         Integer opcion, size;
         
         size = 0;
+        // De la lista de usuarios, se comprobará si hay usuarios disponibles para banear, y más adelante
+        // si el usuario escogido está ya baneado o no
         ArrayList<Usuario> listaData = data.getUsuarios();
         for (int i = 0; i < listaData.size(); i++) {
             if (listaData.get(i) instanceof Cliente) {
@@ -278,13 +288,13 @@ public class Operador extends Usuario{
         }  
     }
     
-    // El método busca en la lista de usuarios y muestra por pantalla a aquellos que son clientes y que han sido baneados. El usuario ingresará por pantalla
-    // un input de opción para seleccionar el usuario a desbanear. Primero comprueba si el usuario está baneado. Si no lo está, mostrará por pantalla "Usuario
-    // no baneado". Por el contrario, si está baneado, lo desbaneará usando el método "desbanear()" y confirmará el desbaneo con un mensaje por pantalla.
+    // Esta función se encargará de desbanear de la base de datos el usuario que el Operador considere,
+    // de forma parecida a la función anterior
     public void desbanear (Database data) {
         Scanner input = new Scanner (System.in);
         Integer opcion;
         
+        // Cogerá la lista de usuarios y la recorrerá
         ArrayList<Usuario> listaData = data.getUsuarios();
         for (int i = 0; i < listaData.size(); i++) {
             if (listaData.get(i) instanceof Cliente) {
