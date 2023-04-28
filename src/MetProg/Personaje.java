@@ -17,6 +17,7 @@ public class Personaje implements Serializable{
     private ArrayList<Fortaleza> fortalezas;
     private Integer poder;
 
+    // Constructor del personaje 
     public Personaje(Habilidad habilidad, HashMap<String, Arma> armas, HashMap<String, Armadura> armaduras, ArrayList<Esbirro> esbirros, Integer salud, ArrayList<Debilidad> debilidades, ArrayList<Fortaleza> fortalezas, Integer poder) {
         this.habilidad = habilidad;
         this.armas = armas;
@@ -27,39 +28,43 @@ public class Personaje implements Serializable{
         this.fortalezas = fortalezas;
         this.poder = poder;
     }
-
+    // Getter
     public Integer getPoder() {
         return poder;
     }
-
+    // Getter
     public Habilidad getHabilidad() {
         return habilidad;
     }
-
+    // Getter
     public HashMap<String, Arma> getArmas() {
         return armas;
     }
-
+    // Getter
     public HashMap<String, Armadura> getArmaduras() {
         return armaduras;
     }
-
+    // Getter
     public ArrayList<Esbirro> getEsbirros() {
         return esbirros;
     }
-
+    // Getter
     public Integer getSalud() {
         return salud;
     }
-
+    // Getter
     public ArrayList<Debilidad> getDebilidades() {
         return debilidades;
     }
-
+    // Getter
     public ArrayList<Fortaleza> getFortalezas() {
         return fortalezas;
     }
-    
+    // Metodo para gestionar las armas 
+    // A partir de un switch case el usuario elige la opción que desee
+    // 1 añadir arma, se añade un arma al mapa de armas
+    // 2 borrar arma, se borra el arma que elija el usuario 
+    // 3 modificar arma, se modifica cualquiera de los atributos del arma
     public void modificarArmas(){
         Scanner input = new Scanner(System.in);
         Integer opcion, modifAtaque, modifDefensa, manos;
@@ -197,6 +202,8 @@ public class Personaje implements Serializable{
             }
         } while (opcion != 4);
     }
+    // Metodo para gestionar las armaduras
+    // Misma funcionalidad que con las armas
     public void modificarArmadura(){
            
         Scanner input = new Scanner(System.in);
@@ -213,7 +220,7 @@ public class Personaje implements Serializable{
             opcion = input.nextInt();
             input.nextLine();
             switch (opcion){
-                // todos las funciones se hacen de igual manera que con las armas
+      
                 case 1: System.out.println("Nombre de la nueva armadura: ");
                         nombre = input.nextLine();
                         System.out.println("Modificador de ataque: (rango 1-3)");
@@ -297,6 +304,8 @@ public class Personaje implements Serializable{
             }
         } while (opcion != 4);
     }
+    // Metodo para modificar la habilidad del personaje
+    // Se recibe la habilidad del personaje y se ofrece la posibilidad de cambiar los atributos o dejarlos igual
     public void modificarHabilidades(Personaje personaje, Database data){
          Scanner input = new Scanner(System.in);
         Integer opcion, modifAtaque, modifDefensa, sangre, rabia;
@@ -305,7 +314,7 @@ public class Personaje implements Serializable{
         Disciplina disciplina;
         Don don;
         Talento talento;
-        //se recibe la habilidad del personaje y se ofrece la posibilidad de cambiar los atributos o dejarlos igual
+     
         System.out.println("La habilidad del personaje es:" +personaje.habilidad.getNombre());
         System.out.println("Ataque:"+personaje.habilidad.getAtaque());
         System.out.println("Defensa:"+personaje.habilidad.getDefensa());
@@ -380,7 +389,7 @@ public class Personaje implements Serializable{
    
     
     }
-    
+   // Metodo para añadir esbirros a los demonios
      private void anadirSubesbirros(ArrayList<Esbirro> subesbirros){ 
        Scanner input = new Scanner(System.in);
        Humano humano;
@@ -389,7 +398,7 @@ public class Personaje implements Serializable{
        String nombre, pacto;
        Integer tipoesbirro, lealtad,dependencia,confirmacion;
 
-                     // la siguiente funcion tiene como onjetivo añadir esbirros a los demonios
+                
                         System.out.println("Nombre del nuevo esbirro: ");
                         nombre = input.nextLine();
                         System.out.println("Salud: (rango 1-3)");
@@ -444,7 +453,7 @@ public class Personaje implements Serializable{
                                  System.out.println("Desea añadir mas esbirros al demonio (1 para añadir esbirros, 0 para no añadir)");
                                  confirmacion = input.nextInt();
                                  if (confirmacion == 1){
-                                     // en el caso de que añadamos un demonio al demonio se podra añadir 
+                                     // en el caso de que añadamos un demonio al demonio se podran añadir mas esbirros al demonio añadido
                                      this.anadirSubesbirros(subesbirros);
 
                            }else if(confirmacion ==0){
@@ -467,7 +476,11 @@ public class Personaje implements Serializable{
 
 
    }
-    
+    // Metodo para gestionar los esbirros
+    // El usuario puede elegir entre 3 opciones
+    // 1 Añadir esbirros a su personaje
+    // 2 Borrar esbirro 
+    // 3 Modificar esbirros
     public void modificarEsbirros(){
         Scanner input = new Scanner(System.in);
         Integer opcion, salud, tipoesbirro, lealtad, dependencia, confirmacion;
@@ -487,7 +500,7 @@ public class Personaje implements Serializable{
             System.out.println("4.- Volver");
             opcion = input.nextInt();
             input.nextLine();
-            switch (opcion){
+            switch (opcion){ // Se añade un nuevo esbirro
                 case 1: System.out.println("Nombre del nuevo esbirro: ");
                         nombre = input.nextLine();
                         System.out.println("Salud: (rango 1-3)");
@@ -503,6 +516,9 @@ public class Personaje implements Serializable{
                         tipoesbirro = input.nextInt();
                         switch(tipoesbirro){ 
                             case 1:
+                                // Se comprueba si el personaje es un vampiro
+                                // En el caso de que lo sea no podrá tener esbirros humanos
+                                // Segun el tipo de esbirro que sea se añadiran unos atributos u otros
                                 if (this instanceof Vampiro){
                                     System.out.println("\n--- Los vampiros no pueden tener esbirros humanos ---\n");
                                     break;
@@ -567,7 +583,7 @@ public class Personaje implements Serializable{
                         System.out.println("\n--- Demonio añadidio correctamente ---\n");
                         }    break;       
               
-                case 2:
+                case 2: // Se elimina un esbirro
                         System.out.println("Escriba el numero del esbirro que quiera eliminar");
                            for (int i= 0; i< esbirros.size(); i++){
                            System.out.println("-- --");
@@ -579,7 +595,7 @@ public class Personaje implements Serializable{
                        esbirros.remove(indice);
                        System.out.println("Esbirro eliminado con exito");
                            break;
-                
+                // Se modifica un esbirro a partir de la posición del esbirro en el array de esbirros
                 case 3: System.out.println("Escriba el numero del esbirro que quiera modificar");
                         for (int i= 0; i< esbirros.size(); i++){
                            System.out.println("-- --");
@@ -749,6 +765,8 @@ public class Personaje implements Serializable{
             
 
         }
+    // Metodo que modifica la salud 
+    // Recibe el personaje seleccionado
     public void modificarSalud(Personaje personaje){
         Scanner input = new Scanner(System.in);
         Integer  nuevaSalud;
@@ -772,6 +790,11 @@ public class Personaje implements Serializable{
     
     
     }
+    // Metodo para gestionar las debilidades del personaje
+    // El usuario tendrá 3 opciones 
+    // 1 Añadir debilidad
+    // 2 Eliminar debilidad
+    // 3 Modificar debilidad
     public void modificarDebilidades (){ 
         Scanner input = new Scanner(System.in);
         Integer opcion, sensibilidad;
@@ -862,7 +885,8 @@ public class Personaje implements Serializable{
             }
         } while (opcion != 4);
     }
-    
+    // Metdodo para modificar fortalezas del personaje
+    // El funcionamiento es el mismo que el del metodo modificvar debilidades
     public void modificarFortazlezas(){ 
         Scanner input = new Scanner(System.in);
         Integer opcion, eficacia;
