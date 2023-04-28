@@ -14,6 +14,7 @@ public class Database implements Serializable{
     private ArrayList<Desafio> desafios = new ArrayList<Desafio>();
     private Personaje[] personajes;
     
+    // Constructor donde, dado un tipo, se crea el personaje correspondiente
     public Object pedirPersonaje(String tipo) throws Exception {
         if (tipo.equals("Vampiro")) {
             Vampiro original = (Vampiro) personajes[0];
@@ -32,24 +33,29 @@ public class Database implements Serializable{
         }
     }
     
+    // Getter
     public ArrayList<Usuario> getUsuarios() {
         return Usuarios;
     }
 
+    // Getter
     public Personaje getPersonaje(int pos) {
         return personajes[pos];
     }
 
+    // Getter
     public ArrayList<Desafio> getDesafios() {
         return desafios;
     }
     
+    // Metodo creado para guardar el objeto Database en el archivo binario
     public void saveData() throws FileNotFoundException, IOException{
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data/database.data"));
         out.writeObject(this);
         out.close();
     }
     
+    // Metodo para inicializar unos presets de personajes en primera ejecucion del programa
     public void inicializarPersonajes(){
         if (personajes == null){
             personajes = new Personaje[3];
@@ -133,7 +139,6 @@ public class Database implements Serializable{
             
             personajes[1] = new Licantropo(0, habilidad2, armas2, armaduras2, esbirros2, 3, debilidades2, fortalezas2, 2);
             
-            
             Habilidad habilidad3 = new Talento("Talento", 1, 2);
             HashMap<String,Arma> armas3 = new HashMap<String,Arma>();
             Arma arma31 = new Arma("La temida BK", 3, 3, 1);
@@ -173,6 +178,7 @@ public class Database implements Serializable{
         }
     }
     
+    // Metodo que dado un nick elimina a dicho usuario de la BD
     public void eliminarUsuario(String nick){
         int i = 0;
         boolean found = false;
@@ -185,10 +191,12 @@ public class Database implements Serializable{
         }
     }
     
+    // Metodo para añadir un usuario a la BD
     public void añadirUsuario(Usuario usuario){
         Usuarios.add(usuario);
     }
     
+    // Metodo que, dado un nick, devuelve la posicion de ese desafio en el ArrayList de la BD
     public int getPosDesafio(String nick){
         for (int i = 0; i < desafios.size(); i++){
             if (nick.equals(desafios.get(i).getDesafiado())){
@@ -198,10 +206,12 @@ public class Database implements Serializable{
         return (-1);
     }
     
+    // Metodo que elimina de la BD un desafio pendiente recivido por parametro
     public void eliminarDesafio(Desafio desafio){
         desafios.remove(desafio);
     }
     
+    // Metodo que devuelve un objeto Usuario de la BD dado el nick de dicho usuario
     public Usuario getUsuarioByNick(String nick) {
         int i = 0;
         boolean found = false;
