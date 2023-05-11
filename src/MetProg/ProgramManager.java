@@ -50,7 +50,7 @@ public class ProgramManager {
     }
     
     // Esta función se encargará de cargar los datos del archivo binario
-    private Database loadData() throws FileNotFoundException, IOException, ClassNotFoundException{
+    public Database loadData() throws FileNotFoundException, IOException, ClassNotFoundException{
         ObjectInputStream in = new ObjectInputStream(new FileInputStream("data/database.data"));
         Database data = (Database) in.readObject();
         in.close();

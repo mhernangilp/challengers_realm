@@ -9,7 +9,6 @@ public class DatabaseTest {
     
     
     public DatabaseTest() {
-        
     }
 
     @Test
