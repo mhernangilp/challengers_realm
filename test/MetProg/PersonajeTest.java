@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
+
 package MetProg;
 
 import java.io.ByteArrayInputStream;
@@ -12,19 +9,6 @@ import java.util.Scanner;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-
-
-
-
-/**
- *
- * @author Usuario
- */
-
-    
-
-
-
 
 
 public class PersonajeTest {
@@ -153,8 +137,7 @@ public class PersonajeTest {
     }
     
     public void testModificarHabilidad() {
-        Vampiro vampiro = new Vampiro( 25, 5,habilidad, armas, armaduras, esbirros, salud, debilidades, fortalezas, poder);
-        vampiro.habilidad = new Disciplina(2, "Dominación", 2, 1);
+        Vampiro vampiro = new Vampiro(25, 5, new Disciplina(2, "Dominación", 2, 1), armas, armaduras, esbirros, salud, debilidades, fortalezas, poder);
         Database data = new Database();
         vampiro.modificarHabilidades(vampiro, data);
         assertEquals("Dominacion", vampiro.getHabilidad().getNombre());
