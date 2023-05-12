@@ -14,7 +14,7 @@ public class Combate {
     private Integer ronda;
     
     // Esta funcion se encargara de recorrer los esbirros de forma recursiva e ir sumando la salud de cada uno
-    private int recorrerEsbirros(ArrayList<Esbirro> e, int salud) {
+    public int recorrerEsbirros(ArrayList<Esbirro> e, int salud) {
         for (int i = 0; i < e.size(); i++) {
             Esbirro esbirro = e.get(i);
             if (esbirro instanceof Demonio) {
@@ -341,7 +341,7 @@ public class Combate {
     }
     
     // Esta función se encargará de actualizar la salud sumando el valor del parámetro
-    private void actualizarSalud(int[] salud, int valor) {
+    public void actualizarSalud(int[] salud, int valor) {
         if (salud[1] != 0) {
                 salud[1] = salud[1] + valor;
             }
