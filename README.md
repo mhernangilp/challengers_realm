@@ -16,14 +16,14 @@ Additionally, we can visualize the class diagram of the program in these photos:
 
 Here we can se some screenshots of the app:
 
-![image](https://github.com/mhernangilp/Practica1_MP/assets/123759990/67e69256-254e-4b99-ad5f-5dfc4e969833)
-![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/a6c8cf49-128a-4acc-834b-ef3a03c0e2d9)
-![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/1c6d4298-06f9-4f8c-87cd-938b09ea8145)
-![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/aa3acb7f-0262-433a-8179-52f5cc3c4ff3)
+![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/80246086-be81-4cf2-a6a4-853f704a8248)
+![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/390576b0-db0a-48e3-9166-bf31b7159aaf)
+![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/4a713dd6-a5d3-4bd2-9c6c-d6f73d93e78b)
 
-![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/d19eb1f4-1a91-4aec-b042-fc1834bd421a)
-![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/bf80af30-2753-4f49-ac95-7feaa02d6ea9)
-![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/0253ebdc-fbee-4bb3-a1d6-626020753d78)
+![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/a3ae4b23-8417-4389-a114-b02bf18e1e36)
+![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/09893ecd-7f25-44e7-b360-32c2699f4c47)
+![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/419bdac8-2386-48de-add7-e4035212d81f)
+
 
 ## Additional info:
 The app has been developed in Apache Net Beans
