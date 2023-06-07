@@ -26,4 +26,5 @@ Here we can se some screenshots of the app:
 ![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/bf80af30-2753-4f49-ac95-7feaa02d6ea9)
 ![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/0253ebdc-fbee-4bb3-a1d6-626020753d78)
 
-
+## Additional info:
+The app has been developed in Apache Net Beans
