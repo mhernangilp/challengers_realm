@@ -11,9 +11,8 @@ Challenger's Realm is an application whose main functionality is to enable diffe
 
 Additionally, we can visualize the class diagram of the program in these photos:
 
-![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/b63ea597-747f-426d-afa8-60be2a560178)
-![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/2fd64b48-6599-4778-92a3-e21481755e1b)
-
+![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/5d7df07c-c5d4-4239-9b8e-b2dc9e14a159)
+![image](https://github.com/mhernangilp/challengers_realm/assets/123759990/cbd90858-0b2a-4111-a9d2-68d0a11c9bd1)
 
 Here we can se some screenshots of the app:
 
